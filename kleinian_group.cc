@@ -65,7 +65,7 @@ void kleinian_group::initialize(){
 	dbl ord;	
 	mat x,y,z,X,Y,Z,m,M;
 	
-	ord=7.0;
+	ord=10.0;
 	len=acosh((cos(PI/ord)/sqrt(3.0))/(sin(PI/ord)*sqrt(2.0)/sqrt(3.0)));
 	
 	x=build_mat(0,2,TWOPI/ord);
