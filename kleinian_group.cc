@@ -7,8 +7,12 @@ class kleinian_group{
 		automaton AUTOMATON;			// automaton defining a combing
 		
 		vector<vertex > VERTICES;	
-		vector<edge > EDGES;
-		vector<triangle > TRIANGLES;
+		vector<edge > EDGES;			// orbit class of edges
+		vector<triangle > TRIANGLES;	// orbit classes of triangles
+		
+		vector<triangle > DRAW_TRIANGLES;	// actual Euclidean triangles in R^3 to draw
+		vector<vec > DRAW_NORMALS;			// normals to actual Euclidean triangles
+		
 		vector<triangle > draw_triangles;
 		bool draw_triangles_generated;
 
@@ -20,13 +24,16 @@ class kleinian_group{
 		void generate_to_depth(int n);	// generate elements out to depth n using combing
 		void list_verts_and_edges();	// output to cout list of vertices and edges to draw
 
-		void draw_state();
-		void draw_glut();
-		void draw_eps();
+		void generate_triangles();	
+		void sort_triangles();		// sort by height - for .eps output
+		
+		void draw_X();		// draw to X windows
+		void draw_glut();	// draw to GLUT
+		void draw_eps();	// draw to eps
 		
 		void read_from_file(ifstream &);		// read data from file
 		void write_to_file(ofstream &);		// write data to file
-		void user_interface();			// top-level user interaction routine
+		void X_user_interface();			// top-level user interaction routine
 };
 
 void kleinian_group::initialize(){

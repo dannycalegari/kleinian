@@ -1,8 +1,8 @@
-/*	rmn.cc	
+/*	kleinian.cc	
 
-	Rational Map Navigator version 0.02
+	Kleinian group renderer version 0.01
 
-	September 7 2012
+	February 13 2014
 
 	Copyright Danny Calegari
 
@@ -70,6 +70,7 @@ struct triangle{
 
 kleinian_group G;
 
+#include "generate.cc";
 #include "glut_functions.cc";
 #include "graphics.cc";
 #include "draw.cc"
@@ -80,12 +81,8 @@ int main(int argc, char *argv[]){
 	
 	ifstream input_file;
 	
-//	setup_graphics();
 	G.initialize();
-	G.generate_to_depth(11);
-//	G.list_verts_and_edges();
-
-	
+	G.generate_to_depth(6);
 	
 	if(argc>1){
 		input_file.open(argv[1]);
@@ -95,27 +92,16 @@ int main(int argc, char *argv[]){
 		G.initialize();
 	};
 
+/*
 	glutInit(&argc, argv);
-	Init();
-	
-	
-	
-	glutDisplayFunc(glut_display);
-	glutReshapeFunc(reshape);
-	glutKeyboardFunc(key);
-	glutSpecialFunc(specialkey);
-	glutIdleFunc(idle);
-	glutMouseFunc(mouse);
-  
-  	G.draw_glut();
-  	
+	glut_setup();
 	glutMainLoop();
-        
-    return(0);
-  
+*/
+
+	setup_graphics();  
 	while(1){
-		G.draw_state();
-		G.user_interface();
+		G.draw_X();
+		G.X_user_interface();
 	};
 		
 	

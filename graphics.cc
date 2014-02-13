@@ -44,7 +44,7 @@ void setup_graphics(void){
 	display_height = DisplayHeight(display, screen_num);
 	screen_num = DefaultScreen(display);  
 	width = 1000;
-	height = 1000;
+	height = 860;
 	win = XCreateSimpleWindow(display, RootWindow(display, screen_num), 0, 0, width, 
 		height, border_width, BlackPixel(display, screen_num), WhitePixel(display, screen_num));
 	XSelectInput(display, win, ExposureMask | KeyPressMask | ButtonPressMask | PointerMotionMask);
