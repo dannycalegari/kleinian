@@ -59,12 +59,12 @@ void specialkey(int key, int x, int y)
 void glut_setup(void){
 	glutInitWindowSize(1000, 1000);
 	glutInitWindowPosition(2,2);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE | GLUT_DEPTH);
 	glutCreateWindow("Kleinian");
 	glViewport(0, 0, 1000, 1000);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(50,1,0.1,4);
+	gluPerspective(50,1,0.1,8);
 	
 	gluLookAt(0.01,0.01,2.5,0,0,0,0,0,1);			// looking from above
 		// strangely fails when x and y coordinates are 0 instead of 0.01
