@@ -1,0 +1,116 @@
+void kleinian_group::initialize(){
+	GENERATORS.clear();
+	
+	int i;
+	mat a,b,A,B;
+	
+	a=build_mat(0.0,1.0,0.0,0.0, 0.0,0.0,1.0,0.0, 1.0,0.0,0.0,0.0, 0.0,0.0,0.0,1.0); // alpha
+	b=build_mat(0.0,0.0,-1.0,0.0, 1.0,0.0,0.0,0.0, 0.0,-1.0,0.0,0.0, 0.0,0.0,0.0,1.0); // beta
+	A=a*a;	// alpha^-1
+	B=b*b;	// beta^-1
+	
+	// 11 nontrivial elements of A_4
+	
+	GENERATORS.push_back(a);	// gen 0
+	GENERATORS.push_back(A);	// gen 1
+	GENERATORS.push_back(b);	// gen 2
+	GENERATORS.push_back(B);	// gen 3
+	GENERATORS.push_back(a*b);	// gen 4
+	GENERATORS.push_back(a*B);	// gen 5
+	GENERATORS.push_back(b*a);	// gen 6
+	GENERATORS.push_back(b*A);	// gen 7
+	GENERATORS.push_back(A*b);	// gen 8
+	GENERATORS.push_back(B*a);	// gen 9
+	GENERATORS.push_back(a*b*a);	// gen 10
+		
+	dbl len;
+	dbl ord;	
+	mat x,y,z,X,Y,Z,m,M;
+	
+	ord=7.0;
+	len=acosh((cos(PI/ord)/sqrt(3.0))/(sin(PI/ord)*sqrt(2.0)/sqrt(3.0)));
+	
+	x=build_mat(0,2,TWOPI/ord);
+	y=build_mat(0,1,PI/4.0);
+	z=build_mat(2,3,len);
+	X=build_mat(2,0,TWOPI/ord);
+	Y=build_mat(1,0,PI/4.0);
+	Z=build_mat(2,3,-1.0*len);
+	
+	m=y*z*x*Y*Z;
+	M=y*z*X*Y*Z;
+	
+	// rotation of order ord
+	
+	GENERATORS.push_back(m);
+	GENERATORS.push_back(M);
+
+	AUTOMATON.clear();
+	vector< pair<int,int> > V;
+
+	// state 0
+	V.clear();	
+	V.push_back(make_pair(11,1));
+	V.push_back(make_pair(12,4));
+	AUTOMATON.push_back(V);
+	
+	// state 1
+	V.clear();
+	V.push_back(make_pair(11,2));
+	for(i=0;i<11;i++){
+		V.push_back(make_pair(i,7));
+	};
+	AUTOMATON.push_back(V);
+
+	// state 2
+	V.clear();
+	V.push_back(make_pair(11,3));
+	for(i=0;i<11;i++){
+		V.push_back(make_pair(i,7));
+	};
+	AUTOMATON.push_back(V);	
+	
+	// state 3	
+	V.clear();
+	for(i=0;i<11;i++){
+		V.push_back(make_pair(i,7));
+	};
+	AUTOMATON.push_back(V);
+	
+	// state 4
+	V.clear();
+	V.push_back(make_pair(12,5));
+	for(i=0;i<11;i++){
+		V.push_back(make_pair(i,7));
+	};
+	AUTOMATON.push_back(V);
+
+	// state 5
+	V.clear();
+	V.push_back(make_pair(12,6));
+	for(i=0;i<11;i++){
+		V.push_back(make_pair(i,7));
+	};
+	AUTOMATON.push_back(V);	
+	
+	// state 6	
+	V.clear();
+	for(i=0;i<11;i++){
+		V.push_back(make_pair(i,7));
+	};
+	AUTOMATON.push_back(V);
+
+	// state 7
+	V.clear();	
+	V.push_back(make_pair(11,1));
+	V.push_back(make_pair(12,4));
+	AUTOMATON.push_back(V);	
+	
+	EDGES.clear();
+	edge e;
+	e.vi=build_vec(0.0,0.0,0.0,1.0);
+	e.vt=m*build_vec(0.0,0.0,0.0,1.0);
+	EDGES.push_back(e);
+	
+	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// camera skew angle
+};
