@@ -36,7 +36,7 @@ class kleinian_group{
 		void X_user_interface();			// top-level user interaction routine
 };
 
-void kleinian_group::initialize(){
+void kleinian_group::initialize(){	// this is a hardcoded example; should make this interactive
 	GENERATORS.clear();
 	
 	int i;
