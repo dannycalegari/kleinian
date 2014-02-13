@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
 	ifstream input_file;
 	
 	G.initialize();
-	G.generate_to_depth(6);
+	G.generate_to_depth(12);
 	
 	if(argc>1){
 		input_file.open(argv[1]);
@@ -92,18 +92,19 @@ int main(int argc, char *argv[]){
 		G.initialize();
 	};
 
-/*
+// if in GLUT mode
 	glutInit(&argc, argv);
 	glut_setup();
 	glutMainLoop();
-*/
 
+// otherwise X mode
+/*
 	setup_graphics();  
 	while(1){
 		G.draw_X();
 		G.X_user_interface();
 	};
-		
+*/	
 	
 	return(0);
 };
