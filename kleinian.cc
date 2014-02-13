@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
 	ifstream input_file;
 	
 	G.initialize();
-	G.generate_to_depth(10);
+	G.generate_to_depth(8);
 	
 	if(argc>1){
 		input_file.open(argv[1]);

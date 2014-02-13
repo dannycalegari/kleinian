@@ -24,8 +24,15 @@ void idle(void){
 void key(unsigned char key, int x, int y)
 {
 	switch (key) {
-	default:
-		break;
+		case 'e':	// generate .eps
+			G.sort_triangles();
+			G.draw_eps();
+			break;
+		case 'w':	// write triangles to file (unsorted)
+			G.write_triangles_to_file();
+			break;
+		default:
+			break;
 	};
 	return;
 }

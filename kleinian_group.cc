@@ -32,7 +32,7 @@ class kleinian_group{
 		void draw_eps();	// draw to eps
 		
 		void read_from_file(ifstream &);		// read data from file
-		void write_to_file(ofstream &);		// write data to file
+		void write_triangles_to_file();		// write triangle data to file
 		void X_user_interface();			// top-level user interaction routine
 };
 
@@ -65,7 +65,7 @@ void kleinian_group::initialize(){	// this is a hardcoded example; should make t
 	dbl ord;	
 	mat x,y,z,X,Y,Z,m,M;
 	
-	ord=10.0;
+	ord=7.0;
 	len=acosh((cos(PI/ord)/sqrt(3.0))/(sin(PI/ord)*sqrt(2.0)/sqrt(3.0)));
 	
 	x=build_mat(0,2,TWOPI/ord);
