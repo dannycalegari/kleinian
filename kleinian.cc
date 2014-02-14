@@ -111,7 +111,7 @@ int main(int argc, char *argv[]){
 		};
 	} else {
 		// interactive mode?
-		G.example_initialize();
+		G.example_initialize();	// go to default example
 		cout << "enter depth to generate to:";
 		cin >> depth;
 		cout << "generating triangles \n";
@@ -121,7 +121,6 @@ int main(int argc, char *argv[]){
 	};
 
 	if(G.MODE=="GLUT"){
-		// if in GLUT mode
 		glutInit(&argc, argv);
 		glut_setup();
 		glutMainLoop();

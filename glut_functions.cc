@@ -8,7 +8,7 @@ void glut_display(){
   	take an argument (because of glutDisplayFunc())  */
   
   G.draw_glut();
-  
+
   glutSwapBuffers();
 }
 
@@ -83,6 +83,7 @@ void glut_setup(void){
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 	glEnable(GL_NORMALIZE);
 
 	glEnable(GL_COLOR_MATERIAL);
