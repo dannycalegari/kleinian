@@ -46,6 +46,8 @@ void kleinian_group::example_initialize(){	// this is a hardcoded example; shoul
 	int i;
 	mat a,b,A,B;
 	
+	cout << "generating example group\n";
+	
 	a=build_mat(0.0,1.0,0.0,0.0, 0.0,0.0,1.0,0.0, 1.0,0.0,0.0,0.0, 0.0,0.0,0.0,1.0); // alpha
 	b=build_mat(0.0,0.0,-1.0,0.0, 1.0,0.0,0.0,0.0, 0.0,-1.0,0.0,0.0, 0.0,0.0,0.0,1.0); // beta
 	A=a*a;	// alpha^-1
@@ -68,8 +70,8 @@ void kleinian_group::example_initialize(){	// this is a hardcoded example; shoul
 	dbl len;
 	dbl ord;	
 	mat x,y,z,X,Y,Z,m,M;
-	
-	ord=7.0;
+	cout << "enter order (should be an integer, at least 6): ";
+	cin >> ord;
 	len=acosh((cos(PI/ord)/sqrt(3.0))/(sin(PI/ord)*sqrt(2.0)/sqrt(3.0)));
 	
 	x=build_mat(0,2,TWOPI/ord);
