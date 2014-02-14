@@ -6,8 +6,7 @@ class kleinian_group{
 		vector<mat > GENERATORS;		// semigroup generators
 		automaton AUTOMATON;			// automaton defining a combing
 		
-		vector<vertex > VERTICES;	
-		vector<edge > EDGES;			// orbit class of edges
+		vector<vertex > ELEMENTS;		// group elements
 		vector<triangle > TRIANGLES;	// orbit classes of triangles
 		
 		vector<triangle > DRAW_TRIANGLES;	// actual Euclidean triangles in R^3 to draw
@@ -24,7 +23,7 @@ class kleinian_group{
 		void clever_prune_vertices(int dep);	// needs to be more clever
 		void prune_vertices(int dep);	// removes redundant vertices of depth dep
 		void generate_to_depth(int n);	// generate elements out to depth n using combing
-		void list_verts_and_edges();	// output to cout list of vertices and edges to draw
+		void list_elements();	// output to cout list of group elements
 
 		void generate_triangles();	
 		void sort_triangles();		// sort by height - for .eps output
@@ -70,7 +69,7 @@ void kleinian_group::example_initialize(){	// this is a hardcoded example; shoul
 	dbl ord;	
 	mat x,y,z,X,Y,Z,m,M;
 	
-	ord=7.5;
+	ord=7.0;
 	len=acosh((cos(PI/ord)/sqrt(3.0))/(sin(PI/ord)*sqrt(2.0)/sqrt(3.0)));
 	
 	x=build_mat(0,2,TWOPI/ord);
@@ -98,13 +97,6 @@ void kleinian_group::example_initialize(){	// this is a hardcoded example; shoul
 	};
 	AUTOMATON.push_back(V);
 	
-	
-	EDGES.clear();
-	edge e;
-	e.vi=build_vec(0.0,0.0,0.0,1.0);
-	e.vt=m*build_vec(0.0,0.0,0.0,1.0);
-	EDGES.push_back(e);
-	
 	TRIANGLES.clear();
 	triangle T;
 	T.v[0]=z*build_vec(0.0,0.0,0.0,1.0);
@@ -119,11 +111,11 @@ void kleinian_group::example_initialize(){	// this is a hardcoded example; shoul
 
 void kleinian_group::prune_vertices(int dep){
 	int i,j;
-	for(i=0;i< (int) VERTICES.size();i++){
+	for(i=0;i< (int) ELEMENTS.size();i++){
 		for(j=0;j<i;j++){
-			if(VERTICES[i].d==dep){	// don't prune the same vertex twice
-				if(norm(VERTICES[i].M+(-1.0*VERTICES[j].M))<0.01){	// if i and j are too close
-					VERTICES.erase(VERTICES.begin()+i);	// prune vertex i
+			if(ELEMENTS[i].d==dep){	// don't prune the same vertex twice
+				if(norm(ELEMENTS[i].M+(-1.0*ELEMENTS[j].M))<0.01){	// if i and j are too close
+					ELEMENTS.erase(ELEMENTS.begin()+i);	// prune vertex i
 					i--;
 				};
 			};
@@ -134,19 +126,17 @@ void kleinian_group::prune_vertices(int dep){
 void kleinian_group::clever_prune_vertices(int dep){
 	int i;
 	cout << "sorting vertices \n";
-	VERTICES=sort(VERTICES);
+	ELEMENTS=sort(ELEMENTS);
 	cout << "pruning vertices \n";
 	vector<vertex > V;
 	V.clear();
-	V.push_back(VERTICES[0]);
-	for(i=1;i< (int) VERTICES.size();i++){
-		if(norm(VERTICES[i].M+(-1.0*VERTICES[i-1].M))>=0.01){	// if i and i-1 are not too close
-			V.push_back(VERTICES[i]);
-//			VERTICES.erase(VERTICES.begin()+i);	// prune vertex i
-//			i--;
+	V.push_back(ELEMENTS[0]);
+	for(i=1;i< (int) ELEMENTS.size();i++){
+		if(norm(ELEMENTS[i].M+(-1.0*ELEMENTS[i-1].M))>=0.01){	// if i and i-1 are not too close
+			V.push_back(ELEMENTS[i]);
 		};
 	};
-	VERTICES=V;
+	ELEMENTS=V;
 };
 
 void kleinian_group::generate_to_depth(int n){
@@ -156,49 +146,43 @@ void kleinian_group::generate_to_depth(int n){
 	edge E;
 	mat M;
 
-	VERTICES.clear();	// initialize;
+	ELEMENTS.clear();	// initialize;
 	
 	for(dep=0;dep<=n;dep++){	
 		if(dep==0){	// base case for induction
 			X.M=id_mat();	// base matrix is identity
 			X.s=0;			// base state is 0
 			X.d=0;			// base depth is 0
-			VERTICES.push_back(X);
+			ELEMENTS.push_back(X);
 		} else {	
-			for(i=0;i< (int) VERTICES.size();i++){	// for each element in the list,
-				if(VERTICES[i].d==dep-1){	// is this a terminal vertex?
-					s=VERTICES[i].s;	// s is state
+			for(i=0;i< (int) ELEMENTS.size();i++){	// for each element in the list,
+				if(ELEMENTS[i].d==dep-1){	// is this a terminal vertex?
+					s=ELEMENTS[i].s;	// s is state
 					for(j=0;j<(int) AUTOMATON[s].size();j++){
 						M=GENERATORS[AUTOMATON[s][j].first];	// transition matrix
 						t=AUTOMATON[s][j].second;		// end state
-						X.M=VERTICES[i].M*M;		// new vertex location
+						X.M=ELEMENTS[i].M*M;		// new vertex location
 						X.s=t;						// new state
 						X.d=dep;					// new depth
-						VERTICES.push_back(X);		// add vertex to collection
+						ELEMENTS.push_back(X);		// add vertex to collection
 					};
 				};
 			};
 		};
-		cout << "depth " << dep << ";  " << (int) VERTICES.size() << " vertices\n"; 
+		cout << "depth " << dep << ";  " << (int) ELEMENTS.size() << " elements\n"; 
 		clever_prune_vertices(dep);	// we'll see
-		cout << "after pruning,  " << (int) VERTICES.size() << " vertices\n"; 
+		cout << "after pruning,  " << (int) ELEMENTS.size() << " elements\n"; 
 	};
 	return;
 };
 
-void kleinian_group::list_verts_and_edges(){
+void kleinian_group::list_elements(){
 	int i;
-	cout << (int) VERTICES.size() << " vertices \n";
-	for(i=0;i<(int) VERTICES.size();i++){
-		cout << "vertex " << i << "\n";
-		write(VERTICES[i].M);	// write matrix
-		cout << "state:" << VERTICES[i].s << "  depth:" << VERTICES[i].d << "\n"; 
-	};
-	cout << (int) EDGES.size() << " edges \n";
-	for(i=0;i<(int) EDGES.size();i++){
-		cout << "edge " << i << "\n";
-		write(EDGES[i].vi);
-		write(EDGES[i].vt);
+	cout << (int) ELEMENTS.size() << " elements \n";
+	for(i=0;i<(int) ELEMENTS.size();i++){
+		cout << "element " << i << "\n";
+		write(ELEMENTS[i].M);	// write matrix
+		cout << "state:" << ELEMENTS[i].s << "  depth:" << ELEMENTS[i].d << "\n"; 
 	};
 	return;
 };

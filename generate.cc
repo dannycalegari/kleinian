@@ -49,9 +49,9 @@ void kleinian_group::generate_triangles(){
 	DRAW_TRIANGLES.clear();
 	DRAW_NORMALS.clear();
 	
-	for(i=0;i<(int) VERTICES.size();i++){
+	for(i=0;i<(int) ELEMENTS.size();i++){
 		for(j=0;j<(int) TRIANGLES.size();j++){
-			T=CAMERA*VERTICES[i].M*TRIANGLES[j];	// hyperbolic triangle
+			T=CAMERA*ELEMENTS[i].M*TRIANGLES[j];	// hyperbolic triangle
 			T=triangle_to_poincare_triangle(T);		// Euclidean triangle
 			N=normal(T);							// Euclidean normal
 			DRAW_TRIANGLES.push_back(T);

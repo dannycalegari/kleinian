@@ -39,8 +39,11 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 	char c;
 	triangle T;
 	input_file >> n;	// number of generators
+	cout << n << " generators\n";
+	cout << "reading generators\n";
 	input_file >> c;	// format 'n' for numerical or 'k' for KAK
 	if(c=='n'){
+		cout << "generators in numerical mode \n";
 		for(i=0;i<n;i++){
 			M.clear();
 			for(j=0;j<4;j++){
@@ -56,11 +59,15 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 	};
 	TRIANGLES.clear();
 	input_file >> m;	// number of triangle orbits
+	cout << m << " triangles\n";
 	for(i=0;i<m;i++){
 		for(j=0;j<3;j++){
+			V.clear();
 			for(k=0;k<4;k++){
-				input_file >> T.v[j][k];
+				input_file >> d;
+				V.push_back(d);
 			};
+			T.v[j]=V;
 		};
 		TRIANGLES.push_back(T);
 	};
@@ -75,6 +82,7 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 	AUTOMATON.push_back(W);
 	
 	draw_triangles_generated=false;
+	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// camera skew angle; should be user specified
 };
 
 void kleinian_group::read_triangles_from_file(ifstream &input_file){
