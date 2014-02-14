@@ -31,6 +31,9 @@ void key(unsigned char key, int x, int y)
 		case 'w':	// write triangles to file (unsorted)
 			G.write_triangles_to_file();
 			break;
+		case 'g':	// write group to file
+			G.write_group_to_file();
+			break;
 		default:
 			break;
 	};

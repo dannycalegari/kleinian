@@ -18,7 +18,9 @@ class kleinian_group{
 
 		mat CAMERA;
 		
-		void initialize();
+		string MODE;	// could be "GLUT", "X" or "command"
+		
+		void example_initialize();
 		void clever_prune_vertices(int dep);	// needs to be more clever
 		void prune_vertices(int dep);	// removes redundant vertices of depth dep
 		void generate_to_depth(int n);	// generate elements out to depth n using combing
@@ -31,12 +33,15 @@ class kleinian_group{
 		void draw_glut();	// draw to GLUT
 		void draw_eps();	// draw to eps
 		
-		void read_from_file(ifstream &);		// read data from file
+		void read_triangles_from_file(ifstream &);		// read triangle data from file
+		void read_group_from_file(ifstream &);			// read group data from file
 		void write_triangles_to_file();		// write triangle data to file
+		void write_group_to_file();			// write group data to file
+
 		void X_user_interface();			// top-level user interaction routine
 };
 
-void kleinian_group::initialize(){	// this is a hardcoded example; should make this interactive
+void kleinian_group::example_initialize(){	// this is a hardcoded example; should make this interactive
 	GENERATORS.clear();
 	
 	int i;
@@ -65,7 +70,7 @@ void kleinian_group::initialize(){	// this is a hardcoded example; should make t
 	dbl ord;	
 	mat x,y,z,X,Y,Z,m,M;
 	
-	ord=7.0;
+	ord=7.5;
 	len=acosh((cos(PI/ord)/sqrt(3.0))/(sin(PI/ord)*sqrt(2.0)/sqrt(3.0)));
 	
 	x=build_mat(0,2,TWOPI/ord);

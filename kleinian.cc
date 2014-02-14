@@ -80,31 +80,60 @@ kleinian_group G;
 int main(int argc, char *argv[]){ 
 	
 	ifstream input_file;
-	
-	G.initialize();
-	G.generate_to_depth(8);
-	
+	string T,S = "";
+	int depth;
+		
 	if(argc>1){
-		input_file.open(argv[1]);
-		G.read_from_file(input_file);
-		input_file.close();
+		T=argv[1];	// should be flag
+		if(T=="-t"){	// read file in triangle mode
+			S=std::string(argv[2]);
+			cout << "reading triangles from file " << S << "\n";
+			input_file.open(S.c_str(), std::fstream::in);
+			G.read_triangles_from_file(input_file);
+			input_file.close();
+			cout << "entering GLUT mode \n";
+			G.MODE="GLUT";
+		} else if(T=="-g"){		// read file in group mode
+			S=std::string(argv[2]);
+			cout << "reading generators from file " << S << "\n";
+			input_file.open(S.c_str(), std::fstream::in);
+			G.read_group_from_file(input_file);
+			input_file.close();
+			cout << "enter depth to generate to:";
+			cin >> depth;
+			cout << "generating triangles \n";
+			G.generate_to_depth(depth);
+			cout << "entering GLUT mode \n";
+			G.MODE="GLUT";
+		} else if(T=="-c"){
+			G.MODE="command";	// not implemented yet
+			cout << "command mode not implemented yet \n";
+		};
 	} else {
-		G.initialize();
+		// interactive mode?
+		G.example_initialize();
+		cout << "enter depth to generate to:";
+		cin >> depth;
+		cout << "generating triangles \n";
+		G.generate_to_depth(depth);
+		cout << "entering GLUT mode \n";
+		G.MODE="GLUT";
 	};
 
-// if in GLUT mode
-	glutInit(&argc, argv);
-	glut_setup();
-	glutMainLoop();
-
-// otherwise X mode
-/*
-	setup_graphics();  
-	while(1){
-		G.draw_X();
-		G.X_user_interface();
+	if(G.MODE=="GLUT"){
+		// if in GLUT mode
+		glutInit(&argc, argv);
+		glut_setup();
+		glutMainLoop();
+	} else if(G.MODE=="X"){
+		setup_graphics();  
+		while(1){
+			G.draw_X();
+			G.X_user_interface();
+		};
+	} else if(G.MODE=="command"){
+		// nothing yet
 	};
-*/	
 	
 	return(0);
 };
