@@ -35,6 +35,7 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 	mat M;
 	vec V;
 	int n,m,i,j,k;
+	int a,b;
 	dbl d;
 	char c;
 	triangle T;
@@ -44,7 +45,7 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 	input_file >> c;	// format 'n' for numerical or 'k' for KAK
 	if(c=='n'){
 		cout << "generators in numerical mode \n";
-		for(i=0;i<n;i++){
+		for(i=0;i<n;i++){	// for each generator
 			M.clear();
 			for(j=0;j<4;j++){
 				V.clear();
@@ -53,6 +54,17 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 					V.push_back(d);
 				};
 				M.push_back(V);
+			};
+			GENERATORS.push_back(M);
+		};
+	} else if(c=='k'){
+		cout << "generators in algebraic mode \n";
+		for(i=0;i<n;i++){	// for each generator
+			input_file >> m;	// number of elementary generators
+			M=build_mat(0,1,0.0);	// identity matrix
+			for(j=0;j<m;j++){
+				input_file >> a >> b >> d;
+				M=M*build_mat(a,b,d);
 			};
 			GENERATORS.push_back(M);
 		};
