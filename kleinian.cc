@@ -82,6 +82,7 @@ int main(int argc, char *argv[]){
 	ifstream input_file;
 	string T,S = "";
 	int depth;
+	char c;
 		
 	if(argc>1){
 		T=argv[1];	// should be flag
@@ -116,6 +117,15 @@ int main(int argc, char *argv[]){
 		cin >> depth;
 		cout << "generating triangles \n";
 		G.generate_to_depth(depth);
+		cout << "fancy curvilinear triangles (y/n)?:";
+		cin >> c;
+		if(c=='y'){
+			G.generate_fancy=true;
+			cout << "mesh size (should be between 0.01 and 0.2):";
+			cin >> G.mesh;
+		} else {
+			G.generate_fancy=false;
+		};
 		cout << "entering GLUT mode \n";
 		G.MODE="GLUT";
 	};

@@ -84,21 +84,30 @@ void kleinian_group::draw_glut(){	// draw to GLUT
 	int i;
 	
 	if(draw_triangles_generated==false){
-		generate_triangles();
+		if(generate_fancy){
+			fancy_generate_triangles();
+		} else {
+			generate_triangles();	
+		};
 		draw_triangles_generated=true;
 	};
 
-	dbl r,g,b;
-
-//    glColor3f(0.0f,1.0f,0.0f); 
+//	dbl r,g,b;
+	
+	/* no shimmer effect */
+    glColor3f(1.0f,0.9f,0.6f); 
+	
 	glBegin(GL_TRIANGLES);
 	srand(0);
 	for(i=0;i<(int) DRAW_TRIANGLES.size();i++){
+	
+	/*	shimmer effect
 		r= 0.9 + ((dbl) (rand()) / (dbl) (RAND_MAX))/10.0;
 		g= 0.9 + ((dbl) (rand()) / (dbl) (RAND_MAX))/10.0;
 		b= 0.9 + ((dbl) (rand()) / (dbl) (RAND_MAX))/10.0;
-    	glColor3f(r,g,b); 
-		glNormal3f(DRAW_NORMALS[i][0], DRAW_NORMALS[i][1], DRAW_NORMALS[i][2]);
+    	glColor3f(r,g,b);	*/
+	
+	glNormal3f(DRAW_NORMALS[i][0], DRAW_NORMALS[i][1], DRAW_NORMALS[i][2]);
 		glVertex3f(DRAW_TRIANGLES[i].v[0][0], DRAW_TRIANGLES[i].v[0][1], DRAW_TRIANGLES[i].v[0][2]);
 		glVertex3f(DRAW_TRIANGLES[i].v[1][0], DRAW_TRIANGLES[i].v[1][1], DRAW_TRIANGLES[i].v[1][2]);
 		glVertex3f(DRAW_TRIANGLES[i].v[2][0], DRAW_TRIANGLES[i].v[2][1], DRAW_TRIANGLES[i].v[2][2]);

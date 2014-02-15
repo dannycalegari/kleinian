@@ -26,6 +26,9 @@ class kleinian_group{
 		void list_elements();	// output to cout list of group elements
 
 		void generate_triangles();	
+		void fancy_generate_triangles();	// try to get curvy Poincare triangles by subdivision
+		bool generate_fancy;
+		dbl mesh;	// mesh size for fancy triangles
 		void sort_triangles();		// sort by height - for .eps output
 		
 		void draw_X();		// draw to X windows

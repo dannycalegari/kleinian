@@ -232,6 +232,18 @@ dbl norm(mat A){	// returns the sum of the absolute values of the coefficients
 	return(t);
 };
 
+dbl Enorm(vec V){	// Euclidean norm of first 3 components
+	dbl t;
+	t=sqrt((V[0]*V[0])+(V[1]*V[1])+(V[2]*V[2]));
+	return(t);
+};
+
+dbl Hnorm(vec V){	// hyperbolic norm of vector
+	dbl t;
+	t=sqrt((V[3]*V[3])-(V[0]*V[0])-(V[1]*V[1])-(V[2]*V[2]));
+	return(t);
+};
+
 dbl entry_sum(mat A){	// returns the sum of the entries of the coefficients
 	dbl t;
 	t=0.0;

@@ -67,11 +67,18 @@ void specialkey(int key, int x, int y)
 }
 
 void glut_setup(void){
-	glutInitWindowSize(1000, 1000);
-	glutInitWindowPosition(2,2);
+	int h,w,m;
+	h=glutGet(GLUT_SCREEN_HEIGHT);
+	w=glutGet(GLUT_SCREEN_WIDTH);
+	m=h;
+	if(w<h){
+		m=w;
+	};
+	glutInitWindowSize(m, m);
+	glutInitWindowPosition(0,0);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE | GLUT_DEPTH);
 	glutCreateWindow("Kleinian");
-	glViewport(0, 0, 1000, 1000);
+	glViewport(0, 0, m, m);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(50,1,0.1,8);
