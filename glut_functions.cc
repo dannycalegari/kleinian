@@ -1,23 +1,23 @@
 /* glut_functions.cc */
 
 void glut_display(){
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
   /* This is where the polyhedron is drawn. 
   	G is a global variable because glut_display can't
   	take an argument (because of glutDisplayFunc())  */
   
-  G.draw_glut();
+	G.draw_glut();
 
-  glutSwapBuffers();
+	glutSwapBuffers();
 }
 
 void reshape(int width, int height){
-  glViewport(0, 0, width, height);
+	glViewport(0, 0, width, height);
 }
 
 void idle(void){
-  glutPostRedisplay();
+	glutPostRedisplay();
 }
 
 
