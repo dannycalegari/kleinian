@@ -94,7 +94,8 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 	AUTOMATON.push_back(W);
 	
 	draw_triangles_generated=false;
-	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// camera skew angle; should be user specified
+	do_prune=true;
+	CAMERA=id_mat();		// camera skew angle; should be user specified
 };
 
 void kleinian_group::read_triangles_from_file(ifstream &input_file){

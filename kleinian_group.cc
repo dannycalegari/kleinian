@@ -8,18 +8,22 @@ class kleinian_group{
 		
 		vector<vertex > ELEMENTS;		// group elements
 		vector<triangle > TRIANGLES;	// orbit classes of triangles
+		vector<vec > COLORS;			// colors of triangle orbits
 		
 		vector<triangle > DRAW_TRIANGLES;	// actual Euclidean triangles in R^3 to draw
 		vector<vec > DRAW_NORMALS;			// normals to actual Euclidean triangles
+		vector<vec > DRAW_COLORS;			// colors to actual Euclidean triangles in R^3 to draw
 		
 		vector<triangle > draw_triangles;
 		bool draw_triangles_generated;
+		bool do_prune;	// should be "true" unless you *know* the automaton defines a combing
 
 		mat CAMERA;
 		
 		string MODE;	// could be "GLUT", "X" or "command"
 		
 		void example_initialize();
+		void torus_example();
 		void clever_prune_vertices(int dep);	// needs to be more clever
 		void prune_vertices(int dep);	// removes redundant vertices of depth dep
 		void generate_to_depth(int n);	// generate elements out to depth n using combing
@@ -112,6 +116,100 @@ void kleinian_group::example_initialize(){	// this is a hardcoded example; shoul
 	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// camera skew angle
 	
 	draw_triangles_generated=false;
+	do_prune=true;
+};
+
+void kleinian_group::torus_example(){	// this is a hardcoded example; should make this interactive
+	GENERATORS.clear();
+	
+	mat a,b,A,B;
+	dbl twist,shear;
+	cout << "generating torus group\n";
+	cout << "enter parameter (twist, shear):\n";
+	cin >> twist >> shear;
+	
+	a=build_mat(0,3,0.54930614)*build_mat(0,2,-1.0*twist)*build_mat(1,3,-1.0*shear)*build_mat(0,3,0.54930614)*
+		build_mat(0,1,1.04719755)*build_mat(0,3,0.54930614)*build_mat(0,2,twist)*build_mat(1,3,shear)*
+		build_mat(0,3,0.54930614)*build_mat(0,1,-1.04719755);
+
+	A=build_mat(0,1,1.04719755)*build_mat(0,3,-0.54930614)*build_mat(0,2,-1.0*twist)*build_mat(1,3,-1.0*shear)*
+		build_mat(0,3,-0.54930614)*build_mat(0,1,-1.04719755)*build_mat(0,3,-0.54930614)*
+		build_mat(0,2,twist)*build_mat(1,3,shear)*build_mat(0,3,-0.54930614);
+		
+	b=build_mat(0,3,0.54930614)*build_mat(0,2,-1.0*twist)*build_mat(1,3,-1.0*shear)*build_mat(0,3,0.54930614)*
+		build_mat(0,1,-1.04719755)*build_mat(0,3,0.54930614)*build_mat(0,2,0.0)*
+		build_mat(0,3,0.54930614)*build_mat(0,1,1.04719755);
+
+	B=build_mat(0,1,-1.04719755)*build_mat(0,3,-0.54930614)*build_mat(0,2,0.0)*
+		build_mat(0,3,-0.54930614)*build_mat(0,1,1.04719755)*build_mat(0,3,-0.54930614)*
+		build_mat(0,2,twist)*build_mat(1,3,shear)*build_mat(0,3,-0.54930614);
+	
+	GENERATORS.push_back(a);	// gen 0
+	GENERATORS.push_back(A);	// gen 1
+	GENERATORS.push_back(b);	// gen 2
+	GENERATORS.push_back(B);	// gen 3
+	
+	AUTOMATON.clear();
+	vector< pair<int,int> > V;
+
+	// state 0
+	V.clear();	
+	V.push_back(make_pair(0,1));
+	V.push_back(make_pair(1,2));
+	V.push_back(make_pair(2,3));
+	V.push_back(make_pair(3,4));
+	AUTOMATON.push_back(V);
+	
+	// state 1
+	V.clear();	
+	V.push_back(make_pair(0,1));
+	V.push_back(make_pair(2,3));
+	V.push_back(make_pair(3,4));
+	AUTOMATON.push_back(V);
+	
+	// state 2
+	V.clear();	
+	V.push_back(make_pair(1,2));
+	V.push_back(make_pair(2,3));
+	V.push_back(make_pair(3,4));
+	AUTOMATON.push_back(V);
+	
+	// state 3
+	V.clear();	
+	V.push_back(make_pair(0,1));
+	V.push_back(make_pair(1,2));
+	V.push_back(make_pair(2,3));
+	AUTOMATON.push_back(V);
+	
+	// state 4
+	V.clear();	
+	V.push_back(make_pair(0,1));
+	V.push_back(make_pair(1,2));
+	V.push_back(make_pair(3,4));
+	AUTOMATON.push_back(V);
+	
+	TRIANGLES.clear();
+	triangle T;
+	
+	T.v[0]=build_vec(42.8451,-74.2032,0,85.6903);
+	T.v[1]=build_vec(42.8451,74.2032,0,85.6903);
+	T.v[2]=build_vec(-85.6844,0.00336936,0,85.6903);
+	TRIANGLES.push_back(T);
+
+	T.v[0]=build_vec(42.8451,-74.2032,0,85.6903);
+	T.v[1]=build_vec(-85.6844,0.00336936,0,85.6903);
+	T.v[2]=build_vec(-128.533,-222.62,0,257.063);
+	TRIANGLES.push_back(T);
+	
+	COLORS.clear();
+	COLORS.push_back(build_vec(1.0,0.8,0.05,0.0));			// yellow
+	COLORS.push_back(build_vec(0.345,0.235,0.196,0.0));		// brown
+	
+	CAMERA=id_mat();
+	//build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// camera skew angle
+	
+	draw_triangles_generated=false;
+	do_prune=false;
 };
 
 void kleinian_group::prune_vertices(int dep){
@@ -175,8 +273,10 @@ void kleinian_group::generate_to_depth(int n){
 			};
 		};
 		cout << "depth " << dep << ";  " << (int) ELEMENTS.size() << " elements\n"; 
-		clever_prune_vertices(dep);	// we'll see
-		cout << "after pruning,  " << (int) ELEMENTS.size() << " elements\n"; 
+		if(do_prune){
+			clever_prune_vertices(dep);	// we'll see
+			cout << "after pruning,  " << (int) ELEMENTS.size() << " elements\n"; 
+		};
 	};
 	return;
 };

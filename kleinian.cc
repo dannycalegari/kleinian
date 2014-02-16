@@ -78,17 +78,6 @@ kleinian_group G;
 #include "user_interface.cc";
 
 int main(int argc, char *argv[]){ 
-
-/*
-	vec V;
-	mat M;
-	M=build_mat(0,1,2.0943951)*build_mat(0,3,2.0*0.54930614)*build_mat(0,1,1.04719755);
-//	M=build_mat(0,1,-2.0943951)*build_mat(0,3,0.54930614)*build_mat(0,1,-1.57079632)*build_mat(0,3,5.0);
-//	M=build_mat(0,3,0.54930614)*build_mat(0,2,-2.0943951)*build_mat(0,3,0.54930614)*build_mat(0,1,1.04719755);
-	V=build_vec(42.8451,74.2032,0.0,85.6903);
-	write(M*V);
-	return(0);
-*/
 	
 	ifstream input_file;
 	string T,S = "";
@@ -129,6 +118,24 @@ int main(int argc, char *argv[]){
 		} else if(T=="-c"){
 			G.MODE="command";	// not implemented yet
 			cout << "command mode not implemented yet \n";
+		} else if(T=="-et"){	// torus example
+			cout << "torus example\n";
+			G.torus_example();
+			cout << "enter depth to generate to:";
+			cin >> depth;
+			cout << "generating triangles \n";
+			G.generate_to_depth(depth);
+			cout << "fancy curvilinear triangles (y/n)?:";
+			cin >> c;
+			if(c=='y'){
+				G.generate_fancy=true;
+				cout << "mesh size (should be between 0.01 and 0.2):";
+				cin >> G.mesh;
+			} else {
+				G.generate_fancy=false;
+			};
+			cout << "entering GLUT mode \n";
+			G.MODE="GLUT";			
 		};
 	} else {
 		// interactive mode?

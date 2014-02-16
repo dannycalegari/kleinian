@@ -122,6 +122,7 @@ void kleinian_group::fancy_generate_triangles(){
 	triangle T;
 	vec N;
 	vector<triangle > Tlist;
+	vec C;
 	
 	DRAW_TRIANGLES.clear();
 	DRAW_NORMALS.clear();
@@ -132,10 +133,16 @@ void kleinian_group::fancy_generate_triangles(){
 		for(j=0;j<(int) TRIANGLES.size();j++){
 			T=CAMERA*ELEMENTS[i].M*TRIANGLES[j];	// hyperbolic triangle
 			Tlist=triangle_to_poincare_triangle_list(T,mesh);		// Euclidean triangle list
+			if((int) COLORS.size() > 0){
+				C=COLORS[j];
+			} else {
+				C=build_vec(1.0,1.0,1.0,0.0);	// default color
+			};
 			for(k=0;k<(int) Tlist.size();k++){
 				N=normal(Tlist[k]);							// Euclidean normal
 				DRAW_TRIANGLES.push_back(Tlist[k]);
 				DRAW_NORMALS.push_back(N);
+				DRAW_COLORS.push_back(C);
 			};
 		};
 	};
@@ -146,17 +153,25 @@ void kleinian_group::generate_triangles(){
 	int i,j;
 	triangle T;
 	vec N;
+	vec C;
 	
 	DRAW_TRIANGLES.clear();
 	DRAW_NORMALS.clear();
+	DRAW_COLORS.clear();
 	
 	for(i=0;i<(int) ELEMENTS.size();i++){
 		for(j=0;j<(int) TRIANGLES.size();j++){
 			T=CAMERA*ELEMENTS[i].M*TRIANGLES[j];	// hyperbolic triangle
 			T=triangle_to_poincare_triangle(T);		// Euclidean triangle
 			N=normal(T);							// Euclidean normal
+			if((int) COLORS.size() > 0){
+				C=COLORS[j];
+			} else {
+				C=build_vec(1.0,1.0,1.0,0.0);	// default color
+			};
 			DRAW_TRIANGLES.push_back(T);
 			DRAW_NORMALS.push_back(N);
+			DRAW_COLORS.push_back(C);
 		};
 	};
 };
