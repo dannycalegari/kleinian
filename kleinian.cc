@@ -78,6 +78,18 @@ kleinian_group G;
 #include "user_interface.cc";
 
 int main(int argc, char *argv[]){ 
+
+/*
+	mat M,N;
+	vec V;
+	M=build_mat(1.0,0.0,0.0,0.0,0.0,1.0,-1.0,1.0,0.0,1.0,0.5,0.5,0.0,1.0,-0.5,1.5);
+	N=build_mat(1.0,0.0,-1.0,1.0,0.0,1.0,0.0,0.0,1.0,0.0,0.5,0.5,1.0,0.0,-0.5,1.5);
+
+	V=build_vec(0.0,0.0,-10.0,10.0498756211209);
+	write(M*N*V);
+
+	return(0);
+*/
 	
 	ifstream input_file;
 	string T,S = "";

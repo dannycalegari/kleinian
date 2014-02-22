@@ -111,7 +111,7 @@ void kleinian_group::draw_glut(){	// draw to GLUT
 		if((int) DRAW_COLORS.size()>0){
 			glColor3f(DRAW_COLORS[i][0], DRAW_COLORS[i][1], DRAW_COLORS[i][2]);
 		} else {
-			glColor3f(1.0,1.0,1.0);
+			glColor3f(0.9,0.85,0.7);
 		};
 		glVertex3f(DRAW_TRIANGLES[i].v[0][0], DRAW_TRIANGLES[i].v[0][1], DRAW_TRIANGLES[i].v[0][2]);
 		glVertex3f(DRAW_TRIANGLES[i].v[1][0], DRAW_TRIANGLES[i].v[1][1], DRAW_TRIANGLES[i].v[1][2]);

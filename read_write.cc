@@ -84,6 +84,22 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 		TRIANGLES.push_back(T);
 	};
 	
+	if(input_file.eof()==false){
+		input_file >> c;	// color?
+		if(c=='c'){
+			COLORS.clear();
+			for(i=0;i<m;i++){
+				V.clear();
+				for(k=0;k<3;k++){
+					input_file >> d;
+					V.push_back(d);
+				};
+				V.push_back(0.0);
+				COLORS.push_back(V);
+			};
+		};
+	};
+	
 	AUTOMATON.clear();	// worst possible automaton
 	vector< pair<int,int> > W;
 
