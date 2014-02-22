@@ -28,13 +28,17 @@
 \def\R{\mathbb{R}}
 \def\Q{\mathbb{Q}}
 \def\H{\mathbb{H}}
+\def\HH{\mathcal{H}}
 \def\E{\mathbb{E}}
 \def\N{\mathbb{N}}
+\def\P{\mathbb{P}}
 \def\PC{{\mathbb{P}C}}
 \def\CP{\mathbb{CP}}
 \def\C{\mathbb{C}}
 \def\L{\mathcal{L}}
 \def\PSL{\textnormal{PSL}}
+\def\GL{\textnormal{GL}}
+\def\Aut{\textnormal{Aut}}
 \def\1{\boldsymbol{1}}
 \newtheorem{proposition}{Proposition}
 \newtheorem{question}{Question}
@@ -54,10 +58,10 @@
 
 A \textcolor{blue}{Kleinian group} is a \textcolor{red}{finitely generated} and 
 \textcolor{red}{discrete} group of \textcolor{red}{conformal} symmetries of the 
-\textcolor{green}{sphere}, where
+\textcolor{dgreen}{sphere}, where
 
 \begin{enumerate}
-\item{``the \textcolor{green}{sphere}'' means the round unit sphere in Euclidean 3-space; and}
+\item{``the \textcolor{dgreen}{sphere}'' means the round unit sphere in Euclidean 3-space; and}
 \item{``\textcolor{red}{conformal}'' means smooth maps which preserve angles.}
 \end{enumerate}
 
@@ -68,7 +72,7 @@ means discrete as a subset of this group.
 {
 \begin{columns}[c]
 \column{1in}
-A finite group of
+A \textcolor{red}{finite group} of
 rotations is a Kleinian group.
 \column{2in}
 \begin{center}
@@ -81,7 +85,7 @@ rotations is a Kleinian group.
 \begin{columns}[c]
 \column{1.1in}
 The symmetries of a 
-Euclidean tessellation
+\textcolor{red}{Euclidean tessellation}
 is a Kleinian group
 by stereographic
 projection.
@@ -93,13 +97,98 @@ projection.
 }
 \frame
 {
+\begin{columns}[c]
+\column{1.1in}
+A Kleinian group 
+preserving a round circle
+on the sphere is a
+\textcolor{blue}{Fuchsian group}.
+\column{2in}
+\begin{center}
+\includegraphics[width=2in]{fuchsian.png}
+\end{center}
+\end{columns}
+}
+\frame
+{
+If we identify the unit sphere with the \textcolor{dgreen}{Riemann sphere} 
+$$S^2 = \CP^1:=\C\cup \infty$$
+then (orientation-preserving) conformal symmetries are \textcolor{red}{fractional linear
+transformations}
+$$z \to \frac {az+b} {cz+d}$$
+and the group of all such transformations is $\PSL(2,\C)$.
+}
+\frame
+{
+\frametitle{2. Differential Equations}
+
+Kleinian groups arise in nature as monodromy groups of \textcolor{dgreen}{differential equations}.
+\vskip 5pt
+Euler introduced the \textcolor{blue}{hypergeometric equation}
+$$z(1-z)\frac {d^2w}{dw^2} + [c - (a+b+1)z]\frac {dw}{dz} - abw = 0$$
+where $w$ is a function of the variable $z$, and $a$, $b$, $c$ are real constants.
+\vskip 10pt
+For Euler, $w$ and $z$ were real, but for us they can be complex numbers.
+}
+\frame
+{The space of solutions to the hypergeometric equation
+is a complex vector $V$ space of dimension 2. 
+\vskip 10pt
+There are \textcolor{dgreen}{regular singular points}
+at $0$, $1$ and $\infty$, and solutions may be \textcolor{red}{analytically continued} 
+around these points.
+\vskip 10pt
+If $f$ and $g$ are a basis for $V$, the map $$D:z \to f(z)/g(z)$$ is well-defined
+in the \textcolor{dgreen}{upper half plane}
+$$\HH:=\lbrace z \in \C \text{ with positive imaginary part} \rbrace$$
+}
+\frame
+{
+Schwarz showed that the image $D(\HH)$ is a \textcolor{dgreen}{curvilinear triangle} $T$ in $\C$
+whose sides are segments of \textcolor{red}{round circles} or \textcolor{red}{straight lines}
+and whose angles are $|1-c|\pi$, $|c-a-b|\pi$ and $|a-b|\pi$.
+%\begin{center}
+%\includegraphics[width=4in]{Schwarz_triangle.png}
+%\end{center}
+}
+\frame
+{
+If we \textcolor{red}{analytically continue} $D$ across a segment of 
+$\R - \lbrace 0,1,\infty\rbrace$, it maps
+the lower half plane $\overline{\HH}$ onto a triangle obtained from $T$ by \textcolor{dgreen}{inversion}
+in the corresponding circular side. 
+\vskip 10pt
+Continuing $D$ around loops, we get a
+representation 
+$$D_*:\pi_1(\CP^1 - \lbrace 0,1,\infty\rbrace) \to \PSL(2,\C)$$ 
+If the angles of the curvilinear triangle are of the form $\pi/n$ for integers $n$, 
+the image is discrete, and hence a Kleinian group
+called a \textcolor{blue}{triangle group}.
+}
+\frame
+{
+\frametitle{3. Limit sets}
+If $\Gamma$ is a Kleinian group, the sphere $S^2$ decomposes into 
+\begin{enumerate}
+\item{the \textcolor{blue}{Limit set} 
+$\Lambda$ where $\Gamma$ acts \textcolor{red}{ergodically}, and}
+\item{the \textcolor{blue}{Domain of discontinuity}
+$\Omega$ where $\Gamma$ acts \textcolor{red}{properly discontinuously}.}
+\end{enumerate}
+$\Lambda$ is closed, and $\Omega$ is open. For most Kleinian groups, $\Lambda$ is the closure
+of the set of fixed points of $\Gamma$.
+\vskip 10pt
+The quotient $\Omega/\Gamma$ is a Riemann surface. Ahlfors showed it is of
+\textcolor{dgreen}{finite type}; i.e.\/ it is homeomorphic to a compact surface
+minus finitely many points.
+}
+\frame
+{
 \begin{block}{References}
 \begin{itemize}
-\item{M. Bj\"orklund and T. Hartnick, {\em Biharmonic functions on groups 
-and limit theorems for quasimorphisms along random walks}.
-Geom. Topol. {\bf 15} (2011), no. 1, 123--143}
-\item{D. Calegari and J. Maher, {\em Statistics and compression of scl}.
-preprint, arXiv:1008.4952}
+\item{D. Mumford, C. Series and D. Wright, {\em Indra's Pearls: The Vision of Felix Klein}.}
+\item{W. Thurston, {\em Three dimensional manifolds, Kleinian groups and hyperbolic geometry},
+Bull. AMS, 1982}
 \end{itemize}
 \end{block}
 }

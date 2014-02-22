@@ -17,7 +17,7 @@ void reshape(int width, int height){
 }
 
 void idle(void){
-	glutPostRedisplay();
+//	glutPostRedisplay();
 }
 
 
