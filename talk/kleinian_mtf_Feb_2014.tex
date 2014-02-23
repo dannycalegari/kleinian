@@ -84,7 +84,7 @@ rotations is a Kleinian group.
 {
 \begin{columns}[c]
 \column{1.1in}
-The symmetries of a 
+The symmetry group of a 
 \textcolor{red}{Euclidean tessellation}
 is a Kleinian group
 by stereographic
@@ -201,10 +201,25 @@ on $\H^3$ by isometries.
 \vskip 10pt
 Thus the quotient $M:=\H^3/\Gamma$ is a \textcolor{blue}{hyperbolic manifold}
 with universal cover $\H^3$, and fundamental group $\pi_1(M)\cong \Gamma$.
+\vskip 10pt
+Conversely, every 3-manifold $M$ with a \textcolor{red}{complete} hyperbolic
+metric has universal cover $\widetilde{M}$ isometric to $\H^3$, realizing
+the deck group $\pi_1(M)$ as a Kleinian group $\Gamma$.
 }
 \frame
 {
-\frametitle{4. Limit sets}
+Thurston conjectured, and Perelman proved, the 
+\vskip 10pt
+\textcolor{blue}{Geometrization Theorem}: a closed 3-manifold $M$ admits a hyperbolic structure if and only if
+\begin{enumerate}
+\item{every smooth embedded sphere in $M$ bounds a ball;}
+\item{$\pi_1(M)$ is infinite; and}
+\item{$\pi_1(M)$ contains no $\Z^2$ subgroup.}
+\end{enumerate}
+}
+\frame
+{
+\frametitle{4. Dynamics}
 If $\Gamma$ is a Kleinian group, the sphere $S^2$ decomposes into 
 \begin{enumerate}
 \item{the \textcolor{blue}{Limit set} 
@@ -212,12 +227,138 @@ $\Lambda$ where $\Gamma$ acts \textcolor{red}{ergodically}, and}
 \item{the \textcolor{blue}{Domain of discontinuity}
 $\Omega$ where $\Gamma$ acts \textcolor{red}{properly discontinuously}.}
 \end{enumerate}
-$\Lambda$ is closed, and $\Omega$ is open. For most Kleinian groups, $\Lambda$ is the closure
-of the set of fixed points of $\Gamma$.
+$\Lambda$ is closed, and $\Omega$ is open. For torsion-free 
+Kleinian groups, $\Lambda$ is the closure of the set of fixed points of $\Gamma$.
 \vskip 10pt
 The quotient $\Omega/\Gamma$ is a Riemann surface. Ahlfors showed it is of
 \textcolor{dgreen}{finite type}; i.e.\/ it is homeomorphic to a compact surface
 minus finitely many points.
+}
+\frame
+{
+A random walk in the Euclidean plane is recurrent. In higher dimensions, it diverges, but
+very slowly and chaotically.
+\begin{columns}[c]
+\column{2in}
+\begin{center}
+\includegraphics[width=2in]{turtle_Euclid.png}
+\end{center}
+\column{2in}
+\begin{center}
+\includegraphics[width=2in]{turtle_hyperbolic.png}
+\end{center}
+\end{columns}
+In hyperbolic space of any dimension, the negative curvature \textcolor{dgreen}{freezes} 
+the trajectory of a random walk, so that it converges to a definite point on the sphere
+at infinity.
+}
+\frame
+{
+If $\Gamma$ is a Kleinian group, \textcolor{red}{measurable functions} on $\Omega/\Gamma$
+are the asymptotic values of \textcolor{red}{harmonic functions} on the hyperbolic
+manifold $M:=\H^3/\Gamma$.
+\vskip 10pt
+So whenever $\Lambda$ is not equal to $S^2$ there are many harmonic functions on $M$.
+\begin{center}
+\includegraphics[width=1in]{ctm_cusp.png}\hskip 13pt
+\includegraphics[width=1in]{ctm_carpet.png}\hskip 8pt
+\includegraphics[width=1.1in]{ctm_cylindrical.png}
+\end{center}
+\begin{center}
+\small{limit set images by Curt McMullen}
+\end{center}
+}
+\frame
+{
+If $M$ is a closed hyperbolic manifold, there are no nonconstant harmonic functions on $M$,
+by the \textcolor{dgreen}{maximum principle}. So $\Lambda = S^2$.
+\vskip 10pt
+But it {\em is} possible for $\Lambda = S^2$ even if $M$ is noncompact!
+}
+\frame
+{
+\textcolor{blue}{Example:} $\Sigma$ is a surface, and $\phi:\Sigma \to \Sigma$ is
+a diffeomorphism. Define the \textcolor{red}{mapping torus}
+$$M_\phi:=\Sigma\times [0,1]/(s,1)\sim(\phi(s),0)$$
+which is topologically a bundle over $S^1$ with fiber $\Sigma$. So
+there is a short exact sequence of fundamental groups
+$$0 \to \pi_1(\Sigma) \to \pi_1(M_\phi) \to \Z \to 0$$
+In particular, $\pi_1(\Sigma)$ is a \textcolor{red}{normal} subgroup of $\pi_1(M_\phi)$.
+\vskip 10pt
+If $\phi$ is sufficiently complicated, Thurston showed $M_\phi$ is hyperbolic.
+}
+\frame
+{
+Let $\widehat{M}_\phi$ be the infinite cover of $M_\phi$ with fundamental group
+$\pi_1(\Sigma)$. Topologically, $\widehat{M}_\phi = \Sigma \times \R$.
+\vskip 10pt
+Since $\pi_1(\Sigma)$ is \textcolor{red}{normal} in $\pi_1(M_\phi)$, it follows that
+$\Lambda(\widehat{M}_\phi)$ is invariant under all of $\pi_1(M_\phi)$; in fact
+$$\Lambda(\widehat{M}_\phi) = \Lambda(M_\phi)$$
+But $M_\phi$ is closed, so $\Lambda(M_\phi)=S^2$.
+\vskip 10pt
+The universal cover of a fiber $\widetilde{\Sigma}$ is a plane, which is properly embedded in
+$\H^3$. It accumulates on $\Lambda(\widehat{M}_\phi)=S^2$; i.e.\/ this plane limits to all
+of $S^2$!
+\vskip 10pt
+\begin{center}$\langle${\sl show movie}$\rangle$\end{center}
+}
+\frame
+{
+\frametitle{5. Ahlfors' Conjecture and Tameness}
+In 1966, Ahlfors formulated his
+\vskip 10pt
+\textcolor{blue}{Ahlfors Measure Conjecture:} If $\Gamma$ is a Kleinian group, then either
+$\Lambda=S^2$ or $\Lambda$ has measure zero.
+\vskip 10pt
+If $\Gamma$ violates Ahlfors conjecture, we can build a function $\chi_\Lambda$ on $S^2$
+which is $1$ on $\Lambda$ and $0$ on $\Omega$, and a nonconstant harmonic function
+$h_\Lambda$ on $M:=\H^3/\Gamma$ which is zero on $\Omega/\Gamma$.
+}
+\frame
+{
+A random walk preserves the value of a harmonic function \textcolor{dgreen}{on average}.
+If $\Gamma$ violates Ahlfors conjecture, a random walk on $M:=\H^3/\Gamma$ has
+a definite chance of failing to converge to $\Omega/\Gamma$.
+\vskip 10pt
+Where else can a random walk go? It has to go into one of the \textcolor{dgreen}{ends} of $M$
+and \textcolor{red}{stay there}.
+}
+\frame
+{
+The manifold $M:=\H^3/\Gamma$ has $\pi_1(M)\cong\Gamma$ which is finitely generated.
+\vskip 10pt
+The \textcolor{blue}{Scott Core Theorem} says that there is a \textcolor{red}{compact}
+\textcolor{blue}{core}
+$C \subset M$ such that $C \to M$ is a homotopy equivalence.
+\vskip 10pt
+The \textcolor{dgreen}{ends} of $M$ are the components of $M-C$.
+\vskip 10pt
+Some of these ends limit to components of $\Omega/\Gamma$; these are the 
+\textcolor{red}{geometrically finite} ends.
+}
+\frame
+{
+The cyclic cover $\widehat{M}_\phi=\Sigma \times \R$ has two \textcolor{red}{geometrically
+infinite} ends. The surfaces $\Sigma \times t$ have bounded area, 
+so a random walk on $\widehat{M}_\phi$ looks like a random walk on $\R$.
+\vskip 10pt
+But a random walk on $\R$ is recurrent! So the random walk on $\widehat{M}_\phi$ will not
+stay in either of the ends, but keep coming back to any compact region.
+}
+\frame
+{
+Thurston and Canary showed that to prove Ahlfors Conjecture, it suffices to show that the
+ends of $M:=\H^3/\Gamma$ are all topologically products $\Sigma \times \R^+$. Such ends
+are said to be \textcolor{dgreen}{tame}.
+\vskip 10pt
+In 1974, Marden conjectured that all hyperbolic manifolds $M:=\H^3/\Gamma$ are 
+\textcolor{dgreen}{tame}; equivalently, they are all homeomorphic to the interior of a
+compact 3-manifold, possibly with boundary.
+\vskip 10pt
+In 2004, Marden's \textcolor{blue}{Tameness Conjecture} was proved independently by
+Agol and by Calegari--Gabai; thus by the combined work of many people,
+we know that Ahlfors' Conjecture is true.
 }
 \frame
 {
