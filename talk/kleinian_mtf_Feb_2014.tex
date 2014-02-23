@@ -156,7 +156,7 @@ and whose angles are $|1-c|\pi$, $|c-a-b|\pi$ and $|a-b|\pi$.
 If we \textcolor{red}{analytically continue} $D$ across a segment of 
 $\R - \lbrace 0,1,\infty\rbrace$, it maps
 the lower half plane $\overline{\HH}$ onto a triangle obtained from $T$ by \textcolor{dgreen}{inversion}
-in the corresponding circular side. 
+in the corresponding circular side (or \textcolor{dgreen}{reflection} in a straight side).
 \vskip 10pt
 Continuing $D$ around loops, we get a
 representation 
@@ -164,8 +164,8 @@ $$D_*:\pi_1(\CP^1 - \lbrace 0,1,\infty\rbrace) \to \PSL(2,\C)$$
 }
 \frame
 {
-If the angles of the curvilinear triangle are of the form $\pi/n$ for integers $n$, 
-the image is discrete, and hence a Kleinian group
+If the angles of the curvilinear triangle $T$ are of the form $\pi/n$ for integers $n$, 
+the image of $D_*$ is discrete, and hence is a Kleinian group
 called a \textcolor{blue}{triangle group}.
 \begin{center}
 \includegraphics[width=4in]{triangle_group.png}
@@ -285,8 +285,12 @@ But it {\em is} possible for $\Lambda = S^2$ even if $M$ is noncompact!
 \textcolor{blue}{Example:} $\Sigma$ is a surface, and $\phi:\Sigma \to \Sigma$ is
 a diffeomorphism. Define the \textcolor{red}{mapping torus}
 $$M_\phi:=\Sigma\times [0,1]/(s,1)\sim(\phi(s),0)$$
-which is topologically a bundle over $S^1$ with fiber $\Sigma$. So
-there is a short exact sequence of fundamental groups
+which is topologically a bundle over $S^1$ with fiber $\Sigma$:
+$$\Sigma \to M_\phi \to S^1$$
+}
+\frame
+{
+There is a corresponding short exact sequence of fundamental groups
 $$0 \to \pi_1(\Sigma) \to \pi_1(M_\phi) \to \Z \to 0$$
 In particular, $\pi_1(\Sigma)$ is a \textcolor{red}{normal} subgroup of $\pi_1(M_\phi)$.
 \vskip 10pt
@@ -301,10 +305,22 @@ Since $\pi_1(\Sigma)$ is \textcolor{red}{normal} in $\pi_1(M_\phi)$, it follows 
 $\Lambda(\widehat{M}_\phi)$ is invariant under all of $\pi_1(M_\phi)$; in fact
 $$\Lambda(\widehat{M}_\phi) = \Lambda(M_\phi)$$
 But $M_\phi$ is closed, so $\Lambda(M_\phi)=S^2$.
+}
+\frame
+{
+Each fiber $\Sigma$ is a surface, whose universal cover
+$\widetilde{\Sigma}$ is topologically a plane, which is properly embedded in
+$\widetilde{M}_\phi\cong \H^3$.  
 \vskip 10pt
-The universal cover of a fiber $\widetilde{\Sigma}$ is a plane, which is properly embedded in
-$\H^3$. It accumulates on $\Lambda(\widehat{M}_\phi)=S^2$; i.e.\/ this plane limits to all
+This plane accumulates on $\Lambda(\widehat{M}_\phi)=S^2$; i.e.\/ it limits to all
 of $S^2$!
+\vskip 10pt
+\begin{center}
+\includegraphics[width=1in]{torus_0.png}\hskip 8pt
+\includegraphics[width=1in]{torus_12.png}\hskip 8pt
+\includegraphics[width=1in]{torus_24.png}\hskip 8pt
+\includegraphics[width=1in]{torus_36.png}
+\end{center}
 \vskip 10pt
 \begin{center}$\langle${\sl show movie}$\rangle$\end{center}
 }
