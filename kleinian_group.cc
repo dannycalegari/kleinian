@@ -113,7 +113,12 @@ void kleinian_group::example_initialize(){	// this is a hardcoded example; shoul
 	T.v[2]=m*build_vec(0.0,0.0,0.0,1.0);
 	TRIANGLES.push_back(T);
 	
-	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// camera skew angle
+	COLORS.clear();
+//	COLORS.push_back(build_vec(0.0,0.39215686,0.0,0.0));			// dark green
+	COLORS.push_back(build_vec(0.19607843,0.8039215686,0.19607843,0.0));		// lime green
+	
+	CAMERA=id_mat();		// camera skew angle
+//	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// alternate camera angle
 	
 	draw_triangles_generated=false;
 	do_prune=true;
