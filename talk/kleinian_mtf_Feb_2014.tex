@@ -74,9 +74,9 @@ means discrete as a subset of this group.
 \column{1in}
 A \textcolor{red}{finite group} of
 rotations is a Kleinian group.
-\column{2in}
+\column{3in}
 \begin{center}
-\includegraphics[width=2in]{icosahedron.png}
+\includegraphics[width=3in]{icosahedron.png}
 \end{center}
 \end{columns}
 }
@@ -89,9 +89,9 @@ The symmetries of a
 is a Kleinian group
 by stereographic
 projection.
-\column{2in}
+\column{3in}
 \begin{center}
-\includegraphics[width=2in]{parabolic.png}
+\includegraphics[width=3in]{parabolic.png}
 \end{center}
 \end{columns}
 }
@@ -103,9 +103,9 @@ A Kleinian group
 preserving a round circle
 on the sphere is a
 \textcolor{blue}{Fuchsian group}.
-\column{2in}
+\column{3in}
 \begin{center}
-\includegraphics[width=2in]{fuchsian.png}
+\includegraphics[width=3in]{fuchsian.png}
 \end{center}
 \end{columns}
 }
@@ -125,14 +125,14 @@ and the group of all such transformations is $\PSL(2,\C)$.
 Kleinian groups arise in nature as monodromy groups of \textcolor{dgreen}{differential equations}.
 \vskip 5pt
 Euler introduced the \textcolor{blue}{hypergeometric equation}
-$$z(1-z)\frac {d^2w}{dw^2} + [c - (a+b+1)z]\frac {dw}{dz} - abw = 0$$
+$$z(1-z)\frac {d^2w}{dz^2} + [c - (a+b+1)z]\frac {dw}{dz} - abw = 0$$
 where $w$ is a function of the variable $z$, and $a$, $b$, $c$ are real constants.
 \vskip 10pt
-For Euler, $w$ and $z$ were real, but for us they can be complex numbers.
+For Euler, $w$ and $z$ were real; but for us they can be complex numbers.
 }
 \frame
 {The space of solutions to the hypergeometric equation
-is a complex vector $V$ space of dimension 2. 
+is a complex vector space $V$ of dimension 2. 
 \vskip 10pt
 There are \textcolor{dgreen}{regular singular points}
 at $0$, $1$ and $\infty$, and solutions may be \textcolor{red}{analytically continued} 
@@ -162,10 +162,40 @@ $$D_*:\pi_1(\CP^1 - \lbrace 0,1,\infty\rbrace) \to \PSL(2,\C)$$
 If the angles of the curvilinear triangle are of the form $\pi/n$ for integers $n$, 
 the image is discrete, and hence a Kleinian group
 called a \textcolor{blue}{triangle group}.
+\begin{center}
+\includegraphics[width=4in]{triangle_group.png}
+\end{center}
 }
 \frame
 {
-\frametitle{3. Limit sets}
+\frametitle{3. Hyperbolic geometry}
+Poincar\'e realized that $\PSL(2,\C)$ is also the group
+of (orientation-preserving) \textcolor{red}{isometries} of hyperbolic 3-space $\H^3$.
+\vskip 10pt
+In Poincar\'e's model, $\H^3$ is the interior of the unit ball.
+The hyperbolic metric is obtained by rescaling the Euclidean metric
+by a factor of $2/(1-r^2)$ where $r$ is the distance to $0$.
+\vskip 10pt
+Straight lines in the Poincar\'e metric are arcs of Euclidean
+straight lines or circles perpendicular to the boundary sphere.
+}
+\frame
+{
+\begin{columns}[c]
+\column{1.1in}
+In the Poincar\'e
+metric, objects near the
+boundary sphere look
+smaller.
+\column{3in}
+\begin{center}
+\includegraphics[width=3in]{Poincare.png}
+\end{center}
+\end{columns}
+}
+\frame
+{
+\frametitle{4. Limit sets}
 If $\Gamma$ is a Kleinian group, the sphere $S^2$ decomposes into 
 \begin{enumerate}
 \item{the \textcolor{blue}{Limit set} 
