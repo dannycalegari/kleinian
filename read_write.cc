@@ -99,6 +99,20 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 			};
 		};
 	};
+
+	BACKGROUND_COLOR=build_vec(0.9, 0.9, 0.99, 1.0);	// default
+	
+	if(input_file.eof()==false){
+		input_file >> c;	// background color?
+		if(c=='b'){
+			BACKGROUND_COLOR.clear();
+			for(i=0;i<3;i++){
+				input_file >> d;
+				BACKGROUND_COLOR.push_back(d);
+			};
+			BACKGROUND_COLOR.push_back(0.0);
+		};
+	};
 	
 	AUTOMATON.clear();	// worst possible automaton
 	vector< pair<int,int> > W;
@@ -117,15 +131,16 @@ void kleinian_group::read_group_from_file(ifstream &input_file){		// read data f
 void kleinian_group::read_triangles_from_file(ifstream &input_file){
 	DRAW_TRIANGLES.clear();
 	DRAW_NORMALS.clear();
+	DRAW_COLORS.clear();
 	vec V;
 	triangle T;
 	int n,i,j,k;
 	dbl d;
 	input_file >> n;	// number of triangles
 	for(i=0;i<n;i++){
-		for(j=0;j<3;j++){
+		for(j=0;j<3;j++){	// read triangle j
 			V.clear();
-			for(k=0;k<3;k++){
+			for(k=0;k<3;k++){	// read triangle j vertex k
 				input_file >> d;
 				V.push_back(d);
 			};
@@ -134,15 +149,28 @@ void kleinian_group::read_triangles_from_file(ifstream &input_file){
 		};
 		DRAW_TRIANGLES.push_back(T);
 		V.clear();
-		for(k=0;k<3;k++){
+		for(k=0;k<3;k++){	// read triangle j normal
 			input_file >> d;
 			V.push_back(d);
 		};
 		V.push_back(0.0);
 		DRAW_NORMALS.push_back(V);
 		V.clear();
+		for(k=0;k<3;k++){	// read triangle j color
+			input_file >> d;
+			V.push_back(d);
+		};
+		V.push_back(0.0);
+		DRAW_COLORS.push_back(V);
+		V.clear();
 	};
 	draw_triangles_generated=true;
+	BACKGROUND_COLOR.clear();
+	for(k=0;k<3;k++){	// read background color
+		input_file >> d;
+		BACKGROUND_COLOR.push_back(d);
+	};
+	BACKGROUND_COLOR.push_back(0.0);
 };
 
 
@@ -162,7 +190,10 @@ void kleinian_group::write_triangles_to_file(){		// write data to file
 		};
 		output_file << DRAW_NORMALS[i][0] << " " <<  DRAW_NORMALS[i][1] << " "
 			 << DRAW_NORMALS[i][2] << "\n";
+		output_file << DRAW_COLORS[i][0] << " " << DRAW_COLORS[i][1] << " "
+			<< DRAW_COLORS[i][2] << "\n";
 	};
+	output_file << BACKGROUND_COLOR[0] << " " << BACKGROUND_COLOR[1] << " " << BACKGROUND_COLOR[2] << "\n";
 	output_file.close();	
 };
 
@@ -196,6 +227,20 @@ void kleinian_group::write_group_to_file(){		// write group to file
 			output_file << "\n";
 		};
 	};
+	
+	output_file << 'c' << "\n";	// triangle colors
+	for(i=0;i<(int) COLORS.size();i++){
+		for(j=0;j<3;j++){
+			output_file << COLORS[i][j] << " ";
+		};
+		output_file << "\n";
+	};
+	
+	output_file << 'b' << "\n";	// background colors
+	for(i=0;i<3;i++){
+		output_file << BACKGROUND_COLOR[i] << " ";
+	};
+	output_file << "\n";
 	
 	output_file.close();
 };

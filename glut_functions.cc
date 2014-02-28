@@ -28,7 +28,7 @@ void key(unsigned char key, int x, int y)
 			G.sort_triangles();
 			G.draw_eps();
 			break;
-		case 'w':	// write triangles to file (unsorted)
+		case 't':	// write triangles to file (unsorted)
 			G.write_triangles_to_file();
 			break;
 		case 'g':	// write group to file
@@ -95,8 +95,10 @@ void glut_setup(void){
 
 	glEnable(GL_COLOR_MATERIAL);
 
+	glClearColor(G.BACKGROUND_COLOR[0], G.BACKGROUND_COLOR[1], G.BACKGROUND_COLOR[2], G.BACKGROUND_COLOR[3]);
+	
 //	glClearColor(0.9, 0.9, 0.99, 1.0);		// background very light blue
-	glClearColor(1.0, 1.0, 1.0, 1.0);		// background white
+//	glClearColor(1.0, 1.0, 1.0, 1.0);		// background white
 	
 	glutDisplayFunc(glut_display);
 	glutReshapeFunc(reshape);

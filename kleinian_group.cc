@@ -14,6 +14,8 @@ class kleinian_group{
 		vector<vec > DRAW_NORMALS;			// normals to actual Euclidean triangles
 		vector<vec > DRAW_COLORS;			// colors to actual Euclidean triangles in R^3 to draw
 		
+		vec	BACKGROUND_COLOR;				// background for GLUT animation
+		
 		vector<triangle > draw_triangles;
 		bool draw_triangles_generated;
 		bool do_prune;	// should be "true" unless you *know* the automaton defines a combing
@@ -136,11 +138,13 @@ void kleinian_group::spine_example(){	// this is a hardcoded example; should mak
 	
 	COLORS.clear();
 //	COLORS.push_back(build_vec(0.0,0.39215686,0.0,0.0));			// dark green
-//	COLORS.push_back(build_vec(0.19607843,0.8039215686,0.19607843,0.0));		// lime green
-	COLORS.push_back(build_vec(0.8,0.8,0.8,0.0));			// light gray
+	COLORS.push_back(build_vec(0.19607843,0.8039215686,0.19607843,0.0));		// lime green
+//	COLORS.push_back(build_vec(0.8,0.8,0.8,0.0));			// light gray
 
 //	CAMERA=id_mat();		// camera skew angle
 	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// alternate camera angle
+	
+	BACKGROUND_COLOR=build_vec(0.9, 0.9, 0.99, 1.0);	// light blue
 	
 	draw_triangles_generated=false;
 	do_prune=true;
@@ -234,6 +238,8 @@ void kleinian_group::torus_example(){	// this is a hardcoded example; should mak
 	
 	CAMERA=id_mat();
 	//build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// camera skew angle
+	
+	BACKGROUND_COLOR=build_vec(0.9, 0.9, 0.99, 1.0);	// light blue
 	
 	draw_triangles_generated=false;
 	do_prune=false;
