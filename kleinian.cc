@@ -1,6 +1,6 @@
 /*	kleinian.cc	
 
-	OpenGL Kleinian group visualizer version 0.01
+	GLUT Kleinian group visualizer version 0.01
 
 	February 28 2014
 
