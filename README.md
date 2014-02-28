@@ -3,6 +3,8 @@ kleinian
 
 GLUT Kleinian group visualizer version 0.01
 
+make from the command line; edit makefile to reflect local values for X11 and OpenGL
+
 Usage: from the command line, type
 
 * ./kleinian -t *filename.tri* to read (precomputed) triangle mesh from file
