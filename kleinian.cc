@@ -93,8 +93,7 @@ int main(int argc, char *argv[]){
 	
 	ifstream input_file;
 	string T,S = "";
-	int depth;
-	char c;
+	int i;
 		
 	if(argc>1){
 		T=argv[1];	// should be flag
@@ -112,61 +111,30 @@ int main(int argc, char *argv[]){
 			input_file.open(S.c_str(), std::fstream::in);
 			G.read_group_from_file(input_file);
 			input_file.close();
-			cout << "enter depth to generate to:";
-			cin >> depth;
-			cout << "generating triangles \n";
-			G.generate_to_depth(depth);
-			cout << "fancy curvilinear triangles (y/n)?:";
-			cin >> c;
-			if(c=='y'){
-				G.generate_fancy=true;
-				cout << "mesh size (should be between 0.01 and 0.2):";
-				cin >> G.mesh;
-			} else {
-				G.generate_fancy=false;
-			};
-			cout << "entering GLUT mode \n";
-			G.MODE="GLUT";
+			G.generate_dialog();
 		} else if(T=="-c"){
 			G.MODE="command";	// not implemented yet
 			cout << "command mode not implemented yet \n";
-		} else if(T=="-et"){	// torus example
-			cout << "torus example\n";
-			G.torus_example();
-			cout << "enter depth to generate to:";
-			cin >> depth;
-			cout << "generating triangles \n";
-			G.generate_to_depth(depth);
-			cout << "fancy curvilinear triangles (y/n)?:";
-			cin >> c;
-			if(c=='y'){
-				G.generate_fancy=true;
-				cout << "mesh size (should be between 0.01 and 0.2):";
-				cin >> G.mesh;
-			} else {
-				G.generate_fancy=false;
+		} else if(T=="-e"){	// example mode
+			cout << "example mode\n";
+			cout << "punctured torus (1) or super-ideal tetrahedron (2):";
+			cin >> i;
+			if(i==1){
+				cout << "torus example\n";
+				G.torus_example();
+				G.generate_dialog();
+			} else if(i==2){
+				cout << "super-ideal tetrahedron example\n";
+				G.spine_example();
+				G.generate_dialog();
 			};
-			cout << "entering GLUT mode \n";
-			G.MODE="GLUT";			
 		};
 	} else {
-		// interactive mode?
-		G.example_initialize();	// go to default example
-		cout << "enter depth to generate to:";
-		cin >> depth;
-		cout << "generating triangles \n";
-		G.generate_to_depth(depth);
-		cout << "fancy curvilinear triangles (y/n)?:";
-		cin >> c;
-		if(c=='y'){
-			G.generate_fancy=true;
-			cout << "mesh size (should be between 0.01 and 0.2):";
-			cin >> G.mesh;
-		} else {
-			G.generate_fancy=false;
-		};
-		cout << "entering GLUT mode \n";
-		G.MODE="GLUT";
+		cout << "Welcome to the kleinian group visualizer!\n";
+		cout << "Usage:\n";
+		cout << "kleinian -t <filename.tri> to read (precomputed) triangle mesh from file\n";
+		cout << "kleinian -g <filename.grp> to read generators and triangle orbits from file\n";
+		cout << "kleinian -e to run an example\n";
 	};
 
 	if(G.MODE=="GLUT"){

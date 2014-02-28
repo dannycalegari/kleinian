@@ -95,8 +95,8 @@ void glut_setup(void){
 
 	glEnable(GL_COLOR_MATERIAL);
 
-	glClearColor(0.9, 0.9, 0.99, 1.0);		// background very light blue
-//	glClearColor(1.0, 1.0, 1.0, 1.0);		// background white
+//	glClearColor(0.9, 0.9, 0.99, 1.0);		// background very light blue
+	glClearColor(1.0, 1.0, 1.0, 1.0);		// background white
 	
 	glutDisplayFunc(glut_display);
 	glutReshapeFunc(reshape);

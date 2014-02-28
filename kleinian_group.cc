@@ -22,8 +22,9 @@ class kleinian_group{
 		
 		string MODE;	// could be "GLUT", "X" or "command"
 		
-		void example_initialize();
-		void torus_example();
+		void generate_dialog();		// dialog to generate triangles from group
+		void spine_example();		// hardcoded example: super-ideal triangle group
+		void torus_example();		// hardcoded example: once-punctured torus group
 		void clever_prune_vertices(int dep);	// needs to be more clever
 		void prune_vertices(int dep);	// removes redundant vertices of depth dep
 		void generate_to_depth(int n);	// generate elements out to depth n using combing
@@ -47,7 +48,27 @@ class kleinian_group{
 		void X_user_interface();			// top-level user interaction routine
 };
 
-void kleinian_group::example_initialize(){	// this is a hardcoded example; should make this interactive
+void kleinian_group::generate_dialog(){		// dialog to generate triangles from group
+	int depth;
+	char c;
+	cout << "enter depth to generate to:";
+	cin >> depth;
+	cout << "generating triangles \n";
+	generate_to_depth(depth);
+	cout << "fancy curvilinear triangles (y/n)?:";
+	cin >> c;
+	if(c=='y'){
+		generate_fancy=true;
+		cout << "mesh size (should be between 0.01 and 0.2):";
+		cin >> mesh;
+	} else {
+		generate_fancy=false;
+	};
+	cout << "entering GLUT mode \n";
+	MODE="GLUT";
+};
+
+void kleinian_group::spine_example(){	// this is a hardcoded example; should make this interactive
 	GENERATORS.clear();
 	
 	int i;
@@ -115,10 +136,11 @@ void kleinian_group::example_initialize(){	// this is a hardcoded example; shoul
 	
 	COLORS.clear();
 //	COLORS.push_back(build_vec(0.0,0.39215686,0.0,0.0));			// dark green
-	COLORS.push_back(build_vec(0.19607843,0.8039215686,0.19607843,0.0));		// lime green
-	
-	CAMERA=id_mat();		// camera skew angle
-//	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// alternate camera angle
+//	COLORS.push_back(build_vec(0.19607843,0.8039215686,0.19607843,0.0));		// lime green
+	COLORS.push_back(build_vec(0.8,0.8,0.8,0.0));			// light gray
+
+//	CAMERA=id_mat();		// camera skew angle
+	CAMERA=build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// alternate camera angle
 	
 	draw_triangles_generated=false;
 	do_prune=true;
