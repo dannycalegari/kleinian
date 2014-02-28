@@ -1,5 +1,8 @@
 /* kleinian_group.cc */
 
+/* basic object, with all the data and functions; the Kleinian group is a *global* variable,
+	so that the GL functions (which *must* take void as an argument) can use the data */
+
 class kleinian_group{
 
 	public:

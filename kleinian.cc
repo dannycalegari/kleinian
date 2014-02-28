@@ -1,8 +1,8 @@
 /*	kleinian.cc	
 
-	Kleinian group renderer version 0.01
+	OpenGL Kleinian group visualizer version 0.01
 
-	February 13 2014
+	February 28 2014
 
 	Copyright Danny Calegari
 
@@ -37,8 +37,8 @@ using namespace std;
 #define TWOPI	6.28318530717959
 #define ACC		0.00000000001				// accuracy 1.0e-11
 #define dbl		double						// double
-#define vec 	vector<dbl >				// vector of numbers
-#define mat		vector< vector<dbl > >		// matrix of complex
+#define vec 	vector<dbl >				// vector of dbl
+#define mat		vector< vector<dbl > >		// matrix of dbl
 #define automaton 	vector< vector< pair< int, int > > >		// finite directed labeled graph
 
 // global constants and structs
@@ -68,7 +68,7 @@ struct triangle{
 #include "sort.cc";
 #include "kleinian_group.cc";
 
-kleinian_group G;
+kleinian_group G;		// group is GLOBAL variable so GL functions can use its data
 
 #include "generate.cc";
 #include "glut_functions.cc";
@@ -78,18 +78,6 @@ kleinian_group G;
 #include "user_interface.cc";
 
 int main(int argc, char *argv[]){ 
-
-/*
-	mat M,N;
-	vec V;
-	M=build_mat(1.0,0.0,0.0,0.0,0.0,1.0,-1.0,1.0,0.0,1.0,0.5,0.5,0.0,1.0,-0.5,1.5);
-	N=build_mat(1.0,0.0,-1.0,1.0,0.0,1.0,0.0,0.0,1.0,0.0,0.5,0.5,1.0,0.0,-0.5,1.5);
-
-	V=build_vec(0.0,0.0,-10.0,10.0498756211209);
-	write(M*N*V);
-
-	return(0);
-*/
 	
 	ifstream input_file;
 	string T,S = "";

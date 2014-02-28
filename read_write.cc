@@ -8,8 +8,10 @@
 	format: 
 		First line is the number of triangles N
 		For i = 0 to N-1:
-			line 4i+2 to 4i+4 are xyz coordinates of vertices of triangle i
-			line 4i+5 is xyz coordinates on normal to triangle i
+			line 5i+2 to 5i+4 are xyz coordinates of vertices of triangle i
+			line 5i+5 is xyz coordinates on normal to triangle i
+			line 5i+6 is rgb colors of triangle i
+		Last line is rgb background color
 			
 	filename.grp: list of semigroup generators for Kleinian group
 	
@@ -28,6 +30,11 @@
 		Next line is number of triangle orbits M
 			For i = 0 to M-1:
 				Coordinates of vertices of triangle i
+		Next line is 'c' for triangle colors
+			For i = 0 to M-1:
+				rgb colors of triangle i
+		Next line is 'b' for background color
+			rgb background color
 */
 
 void kleinian_group::read_group_from_file(ifstream &input_file){		// read data from file

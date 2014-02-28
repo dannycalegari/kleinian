@@ -1,7 +1,10 @@
 /* generate.cc */
 
-// conversion functions
-
+/* Conversion functions from klein/poincare/hyperboloid/Euclidean points and triangles.
+	Also, routines to build triangle meshes from group elements and triangle orbits.
+	Triangles can be further subdivided to ``fancy'' curvilinear triangles which are
+	correct in the Poincare model. */
+	
 point vec_to_klein_point(vec V){
 	point p;
 	p.x=500 + (int) (400.0*V[0]/V[3]);

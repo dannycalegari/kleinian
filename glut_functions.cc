@@ -1,5 +1,7 @@
 /* glut_functions.cc */
 
+// Overhead for GL display; all the interesting work is in the command kleinian_group::draw_glut()
+
 void glut_display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   

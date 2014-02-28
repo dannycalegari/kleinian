@@ -1,13 +1,13 @@
 /* draw.cc draw state */
 
-void draw_klein_line(vec V, vec W){		// draw to X windows
+void draw_klein_line(vec V, vec W){		// draw to X windows in Klein model
 	point p,q;
 	p=vec_to_klein_point(V);
 	q=vec_to_klein_point(W);
 	draw_line(p,q,0);
 };
 
-void draw_poincare_line(vec V, vec W){		// draw to X windows
+void draw_poincare_line(vec V, vec W){		// draw to X windows in Poincare model (sort of)
 	point p,q,r;
 	vec R;
 	p=vec_to_poincare_point(V);
@@ -38,10 +38,15 @@ void draw_X_triangle(triangle T, vec N){	// draw to X windows; N is normal (prec
 	draw_triangle(p,q,r,col);
 };
 
-void draw_eps_triangle(triangle T, vec N, ofstream &output_file){	// draw to .eps file
+void draw_eps_triangle(triangle T, vec N, vec C, ofstream &output_file){	// draw to .eps file
+	// N is normal (for shading); C is color
+	
+	/*	N is a vector of norm 1, so the shade is the z component, i.e. the absolute value
+	of N[2].	*/
+	
 	dbl n;
 	n=fabs(N[2]);	// should already be normalized
-	output_file << n << " " << n << " " << n << " setrgbcolor\n";
+	output_file << n*C[0] << " " << n*C[1] << " " << n*C[2] << " setrgbcolor\n";
 	output_file << T.v[0][0] << " " << T.v[0][1] << " moveto\n";
 	output_file << T.v[1][0] << " " << T.v[1][1] << " lineto\n";
 	output_file << T.v[2][0] << " " << T.v[2][1] << " lineto\n";
@@ -147,7 +152,7 @@ void kleinian_group::draw_eps(){	// draw to .eps
 	output_file << "newpath \n";
 
 	for(i=0;i<(int) DRAW_TRIANGLES.size();i++){
-		draw_eps_triangle(DRAW_TRIANGLES[i],DRAW_NORMALS[i], output_file);
+		draw_eps_triangle(DRAW_TRIANGLES[i],DRAW_NORMALS[i],DRAW_COLORS[i],output_file);
 	};
 
 	output_file << "stroke \n";

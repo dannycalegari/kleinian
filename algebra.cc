@@ -23,6 +23,8 @@ mat id_mat(){	// 4x4 identity matrix
 	return(M);
 };
 
+// command to build matrix directly from entries
+
 mat build_mat(dbl a00, dbl a01, dbl a02, dbl a03, dbl a10, dbl a11, dbl a12, dbl a13,
 	dbl a20, dbl a21, dbl a22, dbl a23, dbl a30, dbl a31, dbl a32, dbl a33){	// direct entries
 	mat M;
@@ -46,6 +48,8 @@ mat build_mat(dbl a00, dbl a01, dbl a02, dbl a03, dbl a10, dbl a11, dbl a12, dbl
 	return(M);
 };
 
+// command to build vector directly from entries
+
 vec build_vec(dbl a0, dbl a1, dbl a2, dbl a3){
 	vec V;
 	V.clear();
@@ -56,7 +60,15 @@ vec build_vec(dbl a0, dbl a1, dbl a2, dbl a3){
 	return(V);
 };
 
-mat build_mat(int a, int b, dbl alpha){	// rotation through angle alpha in the (a,b)-plane
+/* command to build ``elementary generator'' in O(3,1) 
+	For a,b distinct integers in 0,1,2, build_mat(a,b,alpha) is
+	rotation through angle alpha in the a-b plane.
+	For a < 3, b = 3, build_mat(a,b,alpha) is hyperbolic
+	translation along the a axis through hyperbolic distance alpha.
+	This format is useful for describing elements via the KAK decomposition.
+*/
+	
+mat build_mat(int a, int b, dbl alpha){	
 	mat M;
 	M=id_mat();	// initialize to identity matrix
 	if(a!=b){
@@ -139,7 +151,7 @@ vec operator*(mat A, vec v){	// returns A*v
 	return(w);
 };
 
-triangle operator*(mat A, triangle T){
+triangle operator*(mat A, triangle T){	// returns effect of matrix A on triangle T
 	triangle U;
 	U.v[0]=A*T.v[0];
 	U.v[1]=A*T.v[1];
@@ -207,7 +219,7 @@ vec operator*(dbl t, vec V){	// returns t*V
 	return(W);
 };
 
-vec cross(vec V, vec W){
+vec cross(vec V, vec W){	// cross product of two vectors (only cares about first 3 coords)
 	vec U;
 	U=V;
 	U[0]=(V[1]*W[2])-(V[2]*W[1]);

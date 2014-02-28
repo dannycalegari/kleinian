@@ -1,5 +1,7 @@
 /* user_interface.cc */
 
+// this is only relevant in X mode, which is off by default
+
 void kleinian_group::X_user_interface(){
 	point p;
 	bool finished;
