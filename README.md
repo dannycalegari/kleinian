@@ -9,7 +9,7 @@ Usage: from the command line, type
 * ./kleinian -g *filename.grp* to read semigroup generators and triangle orbits from file
 * ./kleinian -e to run a (built-in) example
 
-Some same .grp files are in the directory *example_groups*
+Some sample .grp files are in the directory *example_groups*
 
 When in GLUT mode,
 
@@ -18,3 +18,4 @@ When in GLUT mode,
 * press [e] to save figure as .eps file *output.eps*
 * press [command-q] to quit
 
+![Schottky example](https://raw.github.com/dannycalegari/kleinian/example_pictures/master/schottky.png)
