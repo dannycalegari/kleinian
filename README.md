@@ -15,6 +15,6 @@ When in GLUT mode,
 
 * press [t] to save triangulation to *output_file.tri*
 * press [g] to save group to *output_file.grp*
-* press [e] to save figure as .eps file
+* press [e] to save figure as .eps file *output.eps*
 * press [command-q] to quit
 
