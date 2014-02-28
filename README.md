@@ -18,4 +18,4 @@ When in GLUT mode,
 * press [e] to save figure as .eps file *output.eps*
 * press [command-q] to quit
 
-![Schottky example](https://raw.github.com/dannycalegari/kleinian/example_pictures/master/schottky.png)
+![Schottky example](https://raw.github.com/dannycalegari/kleinian/master/example_pictures/schottky.png)
