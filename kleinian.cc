@@ -64,18 +64,18 @@ struct triangle{
 
 
 
-#include "algebra.cc";
-#include "sort.cc";
-#include "kleinian_group.cc";
+#include "algebra.cc"
+#include "sort.cc"
+#include "kleinian_group.cc"
 
 kleinian_group G;		// group is GLOBAL variable so GL functions can use its data
 
-#include "generate.cc";
-#include "glut_functions.cc";
-#include "graphics.cc";
+#include "generate.cc"
+#include "glut_functions.cc"
+#include "graphics.cc"
 #include "draw.cc"
-#include "read_write.cc";
-#include "user_interface.cc";
+#include "read_write.cc"
+#include "user_interface.cc"
 
 int main(int argc, char *argv[]){ 
 	
