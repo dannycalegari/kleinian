@@ -56,15 +56,24 @@ class kleinian_group{
 void kleinian_group::generate_dialog(){		// dialog to generate triangles from group
 	int depth;
 	char c;
-	cout << "enter depth to generate to:";
+	
+	depth=12;	// default
+
+	cout << "enter depth to generate to\n";
+	cout << "(should be < 13 unless group is elementary\n";
+	cout << "or has very small fundamental domain): ";
 	cin >> depth;
+	
 	cout << "generating triangles \n";
 	generate_to_depth(depth);
-	cout << "fancy curvilinear triangles (y/n)?:";
+	
+	cout << "fancy curvilinear triangles (y/n)?: ";
 	cin >> c;
 	if(c=='y'){
 		generate_fancy=true;
-		cout << "mesh size (should be between 0.01 and 0.2):";
+		mesh = 0.05;	// default
+		cout << "mesh size to subdivide triangles to\n";
+		cout << "(should be between 0.02 and 0.2): ";
 		cin >> mesh;
 	} else {
 		generate_fancy=false;
@@ -73,7 +82,7 @@ void kleinian_group::generate_dialog(){		// dialog to generate triangles from gr
 	MODE="GLUT";
 };
 
-void kleinian_group::spine_example(){	// this is a hardcoded example; should make this interactive
+void kleinian_group::spine_example(){	// this is a hardcoded example; 
 	GENERATORS.clear();
 	
 	int i;
@@ -153,13 +162,16 @@ void kleinian_group::spine_example(){	// this is a hardcoded example; should mak
 	do_prune=true;
 };
 
-void kleinian_group::torus_example(){	// this is a hardcoded example; should make this interactive
+void kleinian_group::torus_example(){	// this is a hardcoded example; 
 	GENERATORS.clear();
 	
 	mat a,b,A,B;
 	dbl twist,shear;
+	twist=0.0;	// default
+	shear=0.0;	// default
 	cout << "generating torus group\n";
-	cout << "enter parameter (twist, shear):\n";
+	cout << "enter twist and shear parameters\n";
+	cout << "(two numbers separated by a space; e.g. 0 0): ";
 	cin >> twist >> shear;
 	
 	a=build_mat(0,3,0.54930614)*build_mat(0,2,-1.0*twist)*build_mat(1,3,-1.0*shear)*build_mat(0,3,0.54930614)*

@@ -105,7 +105,7 @@ int main(int argc, char *argv[]){
 			cout << "command mode not implemented yet \n";
 		} else if(T=="-e"){	// example mode
 			cout << "example mode\n";
-			cout << "punctured torus (1) or super-ideal tetrahedron (2):";
+			cout << "punctured torus (1) or super-ideal tetrahedron (2): ";
 			cin >> i;
 			if(i==1){
 				cout << "torus example\n";
