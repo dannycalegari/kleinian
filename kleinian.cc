@@ -105,7 +105,7 @@ int main(int argc, char *argv[]){
 			cout << "command mode not implemented yet \n";
 		} else if(T=="-e"){	// example mode
 			cout << "example mode\n";
-			cout << "punctured torus (1) or super-ideal tetrahedron (2): ";
+			cout << "punctured torus (1), super-ideal tetrahedron (2), or hyperbolic napoleon (3): ";
 			cin >> i;
 			if(i==1){
 				cout << "torus example\n";
@@ -114,6 +114,10 @@ int main(int argc, char *argv[]){
 			} else if(i==2){
 				cout << "super-ideal tetrahedron example\n";
 				G.spine_example();
+				G.generate_dialog();
+			} else if(i==3){
+				cout << "hyperbolic napoleon example\n";
+				G.napoleon_example();
 				G.generate_dialog();
 			};
 		};

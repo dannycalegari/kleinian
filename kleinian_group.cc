@@ -30,6 +30,7 @@ class kleinian_group{
 		void generate_dialog();		// dialog to generate triangles from group
 		void spine_example();		// hardcoded example: super-ideal triangle group
 		void torus_example();		// hardcoded example: once-punctured torus group
+		void napoleon_example();	// hardcoded example: hyperbolic napoleon theorem
 		void clever_prune_vertices(int dep);	// needs to be more clever
 		void prune_vertices(int dep);	// removes redundant vertices of depth dep
 		void generate_to_depth(int n);	// generate elements out to depth n using combing
@@ -259,6 +260,139 @@ void kleinian_group::torus_example(){	// this is a hardcoded example;
 	draw_triangles_generated=false;
 	do_prune=false;
 };
+
+void kleinian_group::napoleon_example(){	// this is a hardcoded example; 
+	GENERATORS.clear();
+	
+	dbl a,b,c;
+	dbl alpha,beta,gamma,lambda,mu,nu;
+	/*
+	int order;
+	dbl angle, target_angle;
+	bool finished;
+	char x;
+	
+	
+	cout << "generating hyperbolic napoleon group\n";
+	cout << "enter order (integer > 1):\n";
+	cin >> order;
+	cout << "enter edge lengths a and b\n";
+	cout << "(two numbers separated by a space; e.g. 1 1): ";
+	cin >> a >> b;
+	c=(a+b)/2.0;	// initial guess
+	target_angle=TWOPI/((dbl) order);
+		cout.precision(15);
+	
+	finished=false;
+	
+	while(finished==false){
+		lambda=acos(cosh(a)/(cosh(a)+1.0));
+		mu=acos(cosh(b)/(cosh(b)+1.0));
+		nu=acos(cosh(c)/(cosh(c)+1.0));
+		alpha=acos((cosh(b)*cosh(c)-cosh(a))/(sinh(b)*sinh(c)));
+		beta=acos((cosh(a)*cosh(c)-cosh(b))/(sinh(a)*sinh(c)));
+		gamma=acos((cosh(a)*cosh(b)-cosh(c))/(sinh(a)*sinh(b)));
+		angle=alpha+beta+gamma+lambda+mu+nu;
+
+		cout << "c = " << c << "\n";
+		cout << "angle " << angle << "\n";
+		cout << "target angle " << target_angle << "\n";
+		cout << "close enough? ";
+		cin >> x;
+		if(x=='y'){
+			finished=true;
+		} else {
+			cout << "enter new value for c ";
+			cin >> c;
+		};
+	};
+	
+	cout << "side lengths \n";
+	cout << " a " << a << "\n";
+	cout << " b " << b << "\n";
+	cout << " c " << c << "\n";
+	cout << "angles \n";
+	cout << " alpha " << alpha << "\n";
+	cout << " beta " << beta << "\n";
+	cout << " gamma " << gamma << "\n";
+	
+	cout.flush();
+	
+	assert(1==0);
+	
+	*/	
+
+	a=3.0;
+	b=4.0;
+	c=1.9749025;
+	lambda=acos(cosh(a)/(cosh(a)+1.0));
+	mu=acos(cosh(b)/(cosh(b)+1.0));
+	nu=acos(cosh(c)/(cosh(c)+1.0));
+	alpha=acos(((cosh(b)*cosh(c))-cosh(a))/(sinh(b)*sinh(c)));
+	beta=acos(((cosh(a)*cosh(c))-cosh(b))/(sinh(a)*sinh(c)));
+	gamma=acos(((cosh(a)*cosh(b))-cosh(c))/(sinh(a)*sinh(b)));	
+	
+	mat X,Y,Z;
+	X=build_mat(0,3,a)*build_mat(0,1,lambda-PI);
+	Y=build_mat(0,3,a)*build_mat(0,1,PI-beta)*build_mat(0,3,c)*build_mat(0,1,nu-PI)*build_mat(1,0,PI-beta)*build_mat(0,3,-1.0*a);
+	Z=build_mat(0,1,gamma-PI)*build_mat(0,3,-1.0*b)*build_mat(0,3,b)*build_mat(0,1,mu-PI)*build_mat(0,3,b)*build_mat(1,0,gamma-PI);
+//	Y=build_mat(0,3,3.0)*build_mat(1,0,PI-beta)*build_mat(0,3,2.0264)*build_mat(0,1,PI-nu)*build_mat(0,1,PI-beta)*build_mat(0,3,-3.0);
+//	Z=build_mat(1,0,PI-gamma)*build_mat(0,3,-4.0)*build_mat(0,3,4.0)*build_mat(0,1,PI-mu)*build_mat(0,3,4.0)*build_mat(0,1,PI-gamma);
+	
+	GENERATORS.push_back(X);	// gen 0
+	GENERATORS.push_back(Y);	// gen 1
+	GENERATORS.push_back(Z);	// gen 2
+	
+	AUTOMATON.clear();
+	vector< pair<int,int> > V;
+
+	// state 0
+	V.clear();	
+	V.push_back(make_pair(0,0));
+	V.push_back(make_pair(1,0));
+	V.push_back(make_pair(2,0));
+	AUTOMATON.push_back(V);
+	
+	TRIANGLES.clear();
+	triangle T;
+	
+	vec W;
+	W=build_vec(0.0,0.0,0.0,1.0);
+	
+	T.v[0]=W;
+	T.v[1]=build_mat(0,3,a)*W;
+	T.v[2]=build_mat(0,1,gamma)*build_mat(0,3,b)*W;
+	TRIANGLES.push_back(T);
+	T.v[0]=W;
+	T.v[1]=build_mat(0,3,a*0.5)*W;
+	T.v[2]=build_mat(1,0,lambda)*build_mat(0,3,a*0.5)*W;
+	TRIANGLES.push_back(T);
+	T.v[0]=W;
+	T.v[1]=build_mat(0,1,gamma)*build_mat(0,3,b*0.5)*W;
+	T.v[2]=build_mat(0,1,gamma+mu)*build_mat(0,3,b*0.5)*W;
+	TRIANGLES.push_back(T);
+	T.v[0]=build_mat(0,3,a)*W;
+	T.v[1]=build_mat(0,3,a)*build_mat(0,1,PI-beta)*build_mat(0,3,c*0.5)*W;
+	T.v[2]=build_mat(0,3,a)*build_mat(0,1,PI-beta-nu)*build_mat(0,3,c*0.5)*W;
+	TRIANGLES.push_back(T);
+
+	COLORS.clear();
+	COLORS.push_back(build_vec(0.9333333,0.9098039,0.66666666,0.0));	// pale goldenrod
+	COLORS.push_back(build_vec(0.5,0.0,0.0,0.0));			// red
+	COLORS.push_back(build_vec(0.0,0.5,0.0,0.0));			// green
+	COLORS.push_back(build_vec(0.0,0.0,0.5,0.0));			// blue
+
+
+//	CAMERA=id_mat();
+	CAMERA=build_mat(0,3,-1.6)*build_mat(0,1,0.5*lambda);
+	//build_mat(2,3,-0.5)*build_mat(0,2,0.7);	// camera skew angle
+	
+	BACKGROUND_COLOR=build_vec(0.9, 0.9, 0.99, 1.0);	// light blue
+	
+	draw_triangles_generated=false;
+	do_prune=true;
+};
+
 
 void kleinian_group::prune_vertices(int dep){
 	int i,j;
