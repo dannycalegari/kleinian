@@ -5,7 +5,7 @@ GLUT Kleinian group visualizer version 0.01
 
 make from the command line; edit makefile to reflect local values for X11 and OpenGL
 
-Usage
+usage
 -----
 
 From the command line, type
